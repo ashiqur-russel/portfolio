@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import Services from "../components/Services";
 import Work from "../components/Work";
 import ClickTracker from "@/components/ClickTracker";
+import Experience from "@/components/Experience";
 
 export default function Home() {
 
@@ -36,6 +37,7 @@ export default function Home() {
       <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <Header isDarkMode={isDarkMode} />
       <About isDarkMode={isDarkMode} />
+      <Experience isDarkMode={isDarkMode} />
       <Services isDarkMode={isDarkMode} />
       <Work isDarkMode={isDarkMode} />
       <Contact isDarkMode={isDarkMode} />
