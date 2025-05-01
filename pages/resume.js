@@ -10,15 +10,7 @@ export default function ResumeViewer() {
                 title="Resume PDF"
             />
 
-            <div className="absolute top-4 right-4">
-                <a
-                    href="/files/resume.pdf"
-                    download
-                    className="bg-red-500 text-white px-4 py-2 rounded shadow  transition"
-                >
-                    Download Resume
-                </a>
-            </div>
+
         </div>
     );
 }
