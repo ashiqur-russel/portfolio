@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "./ui/tracing-beam";
 
 import React from 'react';
-import { calsans } from "@/fonts/calsans";
+import calSans from "@/fonts/calsans";
 
 const Experience = () => {
     return (
@@ -16,7 +16,7 @@ const Experience = () => {
                   {item.role}
                 </h2>
     
-                <p className={twMerge(calsans.className, "text-xl font-semibold mb-2 text-gray-800 dark:text-white")}>
+                <p className={twMerge(calSans.className, "text-xl font-semibold mb-2 text-gray-800 dark:text-white")}>
                   {item.company}
                 </p>
     

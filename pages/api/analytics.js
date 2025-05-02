@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import PageVisit from '../../models/PageVisit'; // Import PageVisit model
-import Click from '../../models/Click'; // Import Click model
 
 const connectToDatabase = async () => {
     if (mongoose.connections[0].readyState) {
@@ -25,12 +24,9 @@ export default async function handler(req, res) {
     try {
         await connectToDatabase();
 
-        // Fetch all page visits and clicks
         const pageVisits = await PageVisit.find();
-        const clicks = await Click.find();
 
-        if (!pageVisits || !clicks) {
-            console.log('No data found for page visits or clicks');
+        if (!pageVisits) {
             return res.status(404).json({ message: 'Data not found' });
         }
 
@@ -49,12 +45,9 @@ export default async function handler(req, res) {
         }, {});
 
 
-        const countryClicks = clicks.reduce((acc, click) => {
-            acc[click.country] = (acc[click.country] || 0) + 1;
-            return acc;
-        }, {});
 
-        res.status(200).json({ countryPageVisits, countryClicks });
+
+        res.status(200).json({ countryPageVisits });
     } catch (error) {
         console.error('Error fetching analytics data:', error);
         res.status(500).json({ message: 'Internal Server Error' });

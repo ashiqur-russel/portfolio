@@ -1,13 +1,9 @@
-import localFont from "next/font/local";
+import localFont from 'next/font/local';
 
-export const calsans = localFont({
-  src: [
-    {
-      path: "../public/fonts/Calsans-Regular.woff2", 
-      weight: "400",  
-      style: "normal",
-    },
-  ],
-  display: "swap",
-  variable: "--font-calsans",
+const calSans = localFont({
+  src: '/CalSans-Regular.woff2',
+  variable: '--font-cal-sans', 
+  display: 'swap',
 });
+
+export default calSans;
