@@ -2,14 +2,38 @@
 
 import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "./ui/tracing-beam";
+import { motion } from "framer-motion";
 
 import React from 'react';
 import calSans from "@/fonts/calsans";
 
 const Experience = () => {
     return (
+        <>
+       <div className="mb-6 text-center">
+       <motion.h4
+        className="text-center mb-2 text-lg font-Ovo"
+        initial={{ y: -10, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          Career Path
+        </motion.h4>
+        <motion.h2
+        className="text-center text-3xl sm:text-5xl font-Ovo"
+        initial={{ y: -10, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          Experience
+        </motion.h2>
+        </div>
+
         <TracingBeam className="px-6">
           <div className="max-w-3xl mx-auto antialiased pt-4 relative">
+          <div className="text-center">
+       
+      </div>
             {careerExperience.map((item, index) => (
               <div key={`exp-${index}`} className="mb-16">
                 <h2 className="bg-black text-white dark:bg-white dark:text-black rounded-full text-xs sm:text-sm w-fit px-4 py-1 mb-4">
@@ -25,14 +49,26 @@ const Experience = () => {
                 </p>
     
                 <ul className="list-disc pl-5 text-sm leading-6 text-gray-700 dark:text-gray-300">
-                  {item.highlights.map((point, idx) => (
-                    <li key={idx}>{point}</li>
+              {item.highlights.map((point, idx) => (
+                <li key={idx}>
+                  {point.split("\n").map((line, i) => (
+                    <React.Fragment key={i}>
+                      {line}
+                      <br />
+                    </React.Fragment>
                   ))}
-                </ul>
+                </li>
+              ))}
+            </ul>
               </div>
             ))}
           </div>
         </TracingBeam>
+        
+        </>
+
+        
+      
       );
 };
 
@@ -47,8 +83,8 @@ const careerExperience = [
     highlights: [
       "Built full-stack ed-tech features for better student engagement",
       "Refactored APIs and improved performance and scalability",
-      "Streamlined CI/CD pipelines and deployment flows",
       "Integrated HubSpot & Contentful for dynamic content management",
+      "Achieved ~80% test coverage across Angular and Nest.js components\nusing Jest and Jasmine, ensuring robust and maintainable code.",
       "Performed regular code reviews for clean, scalable codebase",
     ],
   },
