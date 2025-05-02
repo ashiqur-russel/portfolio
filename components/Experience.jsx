@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import React from 'react';
 import calSans from "@/fonts/calsans";
+import { Button } from "./ui/moving-border";
 
 const Experience = () => {
     return (
@@ -29,26 +30,41 @@ const Experience = () => {
         </motion.h2>
         </div>
 
-        <TracingBeam className="px-6">
-          <div className="max-w-3xl mx-auto antialiased pt-4 relative">
-          <div className="text-center">
-       
-      </div>
-            {careerExperience.map((item, index) => (
-              <div key={`exp-${index}`} className="mb-16">
-                <h2 className="bg-black text-white dark:bg-white dark:text-black rounded-full text-xs sm:text-sm w-fit px-4 py-1 mb-4">
-                  {item.role}
-                </h2>
-    
-                <p className={twMerge(calSans.className, "text-xl font-semibold mb-2 text-gray-800 dark:text-white")}>
-                  {item.company}
-                </p>
-    
-                <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                  {item.location} &middot; {item.period}
-                </p>
-    
-                <ul className="list-disc pl-5 text-sm leading-6 text-gray-700 dark:text-gray-300">
+        <TracingBeam className="max-w-4xl mx-auto relative">
+        {careerExperience.map((item, index) => (
+          <motion.div
+            key={index}
+            className="mb-12 p-4 rounded-2xl border border-white/10 dark:border-black/10 bg-white dark:bg-black shadow-md dark:shadow-sm"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <Button
+                borderRadius="1.75rem"
+                className="bg-black text-white dark:bg-white dark:text-black border-neutral-200 dark:border-slate-800"
+              >
+                {item.role}
+              </Button>
+              <span className="text-xs text-black dark:text-white italic">
+                {item.type}
+              </span>
+            </div>
+
+            <p
+              className={twMerge(
+                calSans.className,
+                "text-xl font-semibold mb-1"
+              )}
+            >
+              {item.company}
+            </p>
+
+            <p className="text-sm text-neutral-400 dark:text-neutral-600 mb-3">
+              {item.location} &middot; {item.period}
+            </p>
+
+                <ul className="list-disc pl-5 text-sm leading-6 text-black dark:text-white">
               {item.highlights.map((point, idx) => (
                 <li key={idx}>
                   {point.split("\n").map((line, i) => (
@@ -60,10 +76,9 @@ const Experience = () => {
                 </li>
               ))}
             </ul>
-              </div>
-            ))}
-          </div>
-        </TracingBeam>
+          </motion.div>
+        ))}
+      </TracingBeam>
         
         </>
 
@@ -77,6 +92,7 @@ export default Experience;
 const careerExperience = [
   {
     role: "Full-Stack Developer",
+    type:"Full-Time",
     company: "BIDI Bildung Digital GmbH",
     location: "Dresden, Germany",
     period: "May 2023 – Nov 2024",
@@ -89,7 +105,9 @@ const careerExperience = [
     ],
   },
   {
-    role: "Full-Stack Developer (Part-time)",
+      role: "Full-Stack Developer",
+      type:"Werkstudent",
+
     company: "Bosch Rexroth AG",
     location: "Ulm, Germany",
     period: "Oct 2022 – Apr 2023",
@@ -100,7 +118,8 @@ const careerExperience = [
     ],
   },
   {
-    role: "Intern – Full Stack Developer",
+    role: "Full Stack Developer",
+    type:"Internship",
     company: "Bosch Rexroth AG",
     location: "Ulm, Germany",
     period: "Apr 2022 – Sep 2022",
