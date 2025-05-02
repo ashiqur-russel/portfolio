@@ -1,10 +1,10 @@
 "use client";
 
-import { calsans } from "@/public/fonts/calsans";
 import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "./ui/tracing-beam";
 
 import React from 'react';
+import { calsans } from "@/fonts/calsans";
 
 const Experience = () => {
     return (

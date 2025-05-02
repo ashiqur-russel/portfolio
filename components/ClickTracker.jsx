@@ -3,39 +3,54 @@ import axios from 'axios';
 
 const ClickTracker = () => {
     useEffect(() => {
-        // Function to get the user's country using ipinfo.io
-        const getUserCountry = async () => {
-          try {
-            // Replace 'your_api_key' with your actual ipinfo.io API key
-            const response = await axios.get('https://ipinfo.io?token=dc8350ead2a2ca');
-            return response.data.country;
-          } catch (error) {
-            console.error('Error getting country:', error);
-            return 'Unknown'; // Return 'Unknown' if there is an error
-          }
+        const getUserDetails = async () => {
+            try {
+                const response = await axios.get('https://ipinfo.io?token=dc8350ead2a2ca');
+                
+                return {
+                    ip: response.data.ip,
+                    hostname: response.data.hostname,
+                    city: response.data.city,
+                    region: response.data.region,
+                    country: response.data.country,
+                    loc: response.data.loc,
+                    org: response.data.org,
+                    postal: response.data.postal,
+                    timezone: response.data.timezone,
+                };
+            } catch (error) {
+                console.error('Error getting user details:', error);
+                return null; 
+            }
         };
 
-
         const trackPageVisit = async () => {
-            const country = await getUserCountry(); // Get country (using ipinfo.io)
-            const timestamp = new Date().toISOString(); // Get the current timestamp
-          
-            try {
-              await axios.post('/api/visit', {
-                country,
-                timestamp,
-              });
-            } catch (error) {
-            }
-          };
-          
-    
-        // Call the function to track the page visit when the page loads
-        trackPageVisit();
-      }, []); // Empty dependency array ensures this runs only once when the component is mounted
-    
+            const userDetails = await getUserDetails();
+            const timestamp = new Date().toISOString();
 
-  return null; // Do not render anything visible
+            if (!userDetails) {
+                console.log("Skipping visit tracking due to missing user details.");
+                return;
+            }
+
+            const clickData = {
+                ...userDetails, 
+                timestamp,    
+            };
+
+            try {
+                await axios.post('/api/visit', clickData);
+                console.log('Page visit data sent successfully');
+            } catch (error) {
+                console.error('Error sending visit data:', error);
+            }
+        };
+
+        trackPageVisit(); 
+
+    }, []); 
+
+    return null; 
 };
 
 export default ClickTracker;

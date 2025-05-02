@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
-import PageVisit from '../../models/PageVisit'; // Import PageVisit model
 
-// Connect to MongoDB
+import mongoose from 'mongoose';
+import PageVisit from '../../models/PageVisit';
+
 const connectToDatabase = async () => {
     if (mongoose.connections[0].readyState) {
-        return; // Already connected
+        return;
     }
 
     console.log('Connecting to MongoDB...');
@@ -23,25 +23,37 @@ const connectToDatabase = async () => {
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const { country, timestamp } = req.body;
+        const {
+            country,
+            timestamp,
+            ip,
+            hostname,
+            city,
+            region,
+            org,
+            postal,
+            timezone,
+            loc
+        } = req.body;
 
-        // Capture the user's IP address from the request headers
-        const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-
+        const userIp = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
         try {
-            // Connect to the database
             await connectToDatabase();
 
-
-            // Create a new PageVisit document
             const pageVisit = new PageVisit({
                 country,
                 timestamp,
-                ip, // Include the IP address
+                ip: userIp || ip,
+                hostname,
+                city,
+                region,
+                org,
+                postal,
+                timezone,
+                loc,
             });
 
-            // Save the page visit data to MongoDB
             await pageVisit.save();
 
             res.status(200).json({ message: 'Page visit data saved successfully' });
@@ -49,7 +61,6 @@ export default async function handler(req, res) {
             res.status(500).json({ message: 'Internal Server Error' });
         }
     } else {
-        // Handle non-POST requests
         res.status(405).json({ message: 'Method Not Allowed' });
     }
 }
