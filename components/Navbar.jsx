@@ -1,5 +1,6 @@
 import { assets } from "@/assets/assets";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
 const Navbar = ({ isDarkMode, setIsDarkMode }) => {
@@ -75,6 +76,11 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
               Experience
             </a>
           </li>
+          <li>
+            <Link className="font-Ovo" href="/blog">
+              Blog
+            </Link>
+          </li>
         </ul>
 
         <div className="flex items-center gap-4">
@@ -144,6 +150,11 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
             <a className="font-Ovo" onClick={closeMenu} href="#contact">
               Experience
             </a>
+          </li>
+          <li>
+            <Link className="font-Ovo" href="/blog">
+              Blog
+            </Link>
           </li>
         </ul>
       </nav>
