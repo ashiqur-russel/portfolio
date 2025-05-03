@@ -122,14 +122,16 @@ export const workData1 = [
 export const workData = [
     {
         title: 'OnBook',
-        description: 'A full-stack project for online book store with Admin and User panel',
+        summary: 'A full-stack e-commerce book store...',
+        description: 'This is a full-featured book store with admin and user roles, shopping cart, payments, etc.',
         bgImage: '/work-1.png',
+        images: ['/work-1.png', '/work-1.png'],
         techStack: ['Typescript', 'React', 'ExpressJS', 'MongoDB', 'Tailwind', 'Stripe'],
         github: 'https://github.com/ashiqur-russel/On.Book-Client',
         liveDemo: 'https://book-on-client.vercel.app/',
         icon: assets.git
-
     },
+
     {
         title: 'Link Tutor',
         description: 'A Online learning platform for students and tutors',

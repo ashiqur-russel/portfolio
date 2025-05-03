@@ -89,6 +89,11 @@ const Work = ({ isDarkMode }) => {
 
               {/* Links - Aligned at bottom */}
               <div className="flex items-center justify-between mt-auto pt-5">
+              <Link href={`/projects/${encodeURIComponent(project.title)}`}>
+              <div className="cursor-pointer">
+                  View Details
+                </div>
+              </Link>
                 {/* GitHub Button */}
                 <Link
                   href={project.github}
