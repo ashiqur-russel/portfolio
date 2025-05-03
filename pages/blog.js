@@ -15,6 +15,7 @@ import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { cn } from "@/lib/utils"
 
 // Mock Data for Blog Posts (Replace with your actual data source)
 const blogPosts = [
@@ -25,7 +26,7 @@ const blogPosts = [
         date: '2024-07-28',
         author: 'Jane Doe',
         tags: ['Web Development', 'Technology', 'Future'],
-        readingTime: 8, // in minutes
+        readingTime: 8,
         imageUrl: 'https://placehold.co/800x400/EEE/31343C',
         content: `
 ## The Future of Web Development
@@ -96,7 +97,7 @@ By mastering React Hooks, you can write cleaner, more efficient, and more mainta
         author: 'Alice Johnson',
         tags: ['Accessibility', 'Web Development', 'Best Practices'],
         readingTime: 10,
-        imageUrl: 'https://placehold.co/800x400/EEE/31343C',  // Replace
+        imageUrl: 'https://placehold.co/800x400/EEE/31343C',
         content: `
 ## Building Accessible Websites
 
@@ -137,7 +138,7 @@ const PostPreview = ({ post, onSelectPost }) => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" // Added cursor-pointer
+            className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
             onClick={() => onSelectPost(post.id)}
         >
             <img
@@ -214,7 +215,7 @@ const PostPage = ({ post, onBack }) => {
                 </motion.div>
                 <button
                     onClick={onBack}
-                    className="absolute top-4 left-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit" // Added onBack prop
+                    className="absolute top-4 left-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit"
                 >
                     <ArrowRight className="w-6 h-6 rotate-180" />
                 </button>
@@ -294,13 +295,18 @@ const BlogPage = () => {
                         <p className="mt-4 text-lg sm:text-xl text-gray-300 font-Outfit">
                             Insights and articles on web development, design, and technology.
                         </p>
+
+                    </motion.div>
+                    <div className="absolute top-4 left-4">
                         <button
                             onClick={handleBackHome}
-                            className="absolute top-4 left-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit"
+                            className={cn(
+                                "bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit",
+                            )}
                         >
                             <Home className="w-6 h-6" />
                         </button>
-                    </motion.div>
+                    </div>
                 </header>
 
                 <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
