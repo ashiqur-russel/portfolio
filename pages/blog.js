@@ -8,11 +8,13 @@ import {
     Tag,
     Clock,
     ArrowRight,
+    Home
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 // Mock Data for Blog Posts (Replace with your actual data source)
 const blogPosts = [
@@ -24,7 +26,7 @@ const blogPosts = [
         author: 'Jane Doe',
         tags: ['Web Development', 'Technology', 'Future'],
         readingTime: 8, // in minutes
-        imageUrl: 'https://placehold.co/800x400/EEE/31343C', // Replace with actual image URL
+        imageUrl: 'https://placehold.co/800x400/EEE/31343C',
         content: `
 ## The Future of Web Development
 
@@ -58,7 +60,7 @@ The future of web development is bright, and it's an exciting time to be a part 
         author: 'John Smith',
         tags: ['React', 'Hooks', 'Frontend'],
         readingTime: 12,
-        imageUrl: 'https://placehold.co/800x400/EEE/31343C', // Replace with actual image URL
+        imageUrl: 'https://placehold.co/800x400/EEE/31343C',
         content: `
 ## Mastering React Hooks
 
@@ -136,7 +138,7 @@ const PostPreview = ({ post, onSelectPost }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer" // Added cursor-pointer
-            onClick={() => onSelectPost(post.id)} // Call the onSelectPost when clicked
+            onClick={() => onSelectPost(post.id)}
         >
             <img
                 src={post.imageUrl}
@@ -173,7 +175,6 @@ const PostPreview = ({ post, onSelectPost }) => {
 
 // Component to display a single blog post
 const PostPage = ({ post, onBack }) => {
-    // Function to parse markdown (basic implementation for demonstration)
 
     const parseMarkdown = (markdown) => {
         const paragraphs = markdown.split('\n\n');
@@ -224,7 +225,7 @@ const PostPage = ({ post, onBack }) => {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="prose prose-invert max-w-3xl mx-auto space-y-6" // Use prose for better typography
+                    className="prose prose-invert max-w-3xl mx-auto space-y-6"
                 >
                     <img
                         src={post.imageUrl}
@@ -240,8 +241,8 @@ const PostPage = ({ post, onBack }) => {
 
 const BlogPage = () => {
     const [selectedPost, setSelectedPost] = useState(null);
-
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -269,14 +270,19 @@ const BlogPage = () => {
         setSelectedPost(null);
     }
 
+    const handleBackHome = () => {
+        router.push('/');
+    };
+
+
     if (selectedPost) {
         const post = blogPosts.find(p => p.id === selectedPost);
-        return <PostPage post={post} onBack={handleBackToBlog} />; // Pass onBack prop
+        return <PostPage post={post} onBack={handleBackToBlog} />;
     }
     return (
         <>
             <div className="bg-darkTheme text-white min-h-screen">
-                <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center">
+                <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center relative">
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -288,6 +294,12 @@ const BlogPage = () => {
                         <p className="mt-4 text-lg sm:text-xl text-gray-300 font-Outfit">
                             Insights and articles on web development, design, and technology.
                         </p>
+                        <button
+                            onClick={handleBackHome}
+                            className="absolute top-4 left-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit"
+                        >
+                            <Home className="w-6 h-6" />
+                        </button>
                     </motion.div>
                 </header>
 
@@ -297,7 +309,7 @@ const BlogPage = () => {
                             <PostPreview
                                 key={post.id}
                                 post={post}
-                                onSelectPost={handlePostSelect} // Pass the handler
+                                onSelectPost={handlePostSelect}
                             />
                         ))}
                     </div>
@@ -309,3 +321,4 @@ const BlogPage = () => {
 };
 
 export default BlogPage;
+
