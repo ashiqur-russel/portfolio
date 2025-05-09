@@ -1,9 +1,6 @@
 import '@/app/globals.css';
-
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/router';
-
 import {
     ArrowUpRight,
     Github,
@@ -19,20 +16,16 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { workData } from '@/assets/assets';
 
-const ProjectDetailsPage = () => {
+const ProjectDetailPage = ({ project }) => {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [autoRotate, setAutoRotate] = useState(true);
     const [rotateInterval, setRotateInterval] = useState(5000);
     const galleryIntervalRef = useRef(null);
-    const router = useRouter();
-    const { slug } = router.query;
-    const [project, setProject] = useState(null);
 
-    useEffect(() => {
-        const foundProject = workData.find((item) => item.slug === slug);
-        setProject(foundProject);
-    }, [slug]);
+    if (!project) {
+        return <div className="bg-darkTheme text-white min-h-screen flex items-center justify-center">Project not found</div>;
+    }
 
     const openGallery = (index) => {
         setSelectedImageIndex(index);
@@ -89,11 +82,7 @@ const ProjectDetailsPage = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isGalleryOpen, prevImage, nextImage, project?.images]);
 
-    if (!project) {
-        return <div className="bg-darkTheme text-white min-h-screen flex items-center justify-center">Loading project details...</div>;
-    }
-
-    const primaryImage = project.bgImage; // Use bgImage as the primary image
+    const primaryImage = project.primaryImage || project.bgImage;
 
     return (
         <div className="bg-darkTheme text-white min-h-screen">
@@ -153,7 +142,7 @@ const ProjectDetailsPage = () => {
                         >
                             <h2 className="text-3xl font-Ovo font-semibold">Tech Stack</h2>
                             <div className="flex flex-wrap gap-2">
-                                {project.techStack.map((tech) => (
+                                {project.techStack && project.techStack.map((tech) => (
                                     <Badge
                                         key={tech}
                                         variant="secondary"
@@ -301,4 +290,23 @@ const ProjectDetailsPage = () => {
     );
 };
 
-export default ProjectDetailsPage;
+export async function getStaticPaths() {
+    const paths = workData.map((project) => ({
+        params: { slug: project.slug },
+    }));
+
+    return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+    const { slug } = params;
+    const project = workData.find((p) => p.slug === slug);
+
+    return {
+        props: {
+            project,
+        },
+    };
+}
+
+export default ProjectDetailPage;
