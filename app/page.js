@@ -38,8 +38,9 @@ export default function Home() {
       <Header isDarkMode={isDarkMode} />
       <About isDarkMode={isDarkMode} />
       <Experience isDarkMode={isDarkMode} />
-      <Services isDarkMode={isDarkMode} />
       <Work isDarkMode={isDarkMode} />
+      <Services isDarkMode={isDarkMode} />
+
       <Contact isDarkMode={isDarkMode} />
       <Footer isDarkMode={isDarkMode} />
       <ClickTracker />

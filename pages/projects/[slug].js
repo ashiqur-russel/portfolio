@@ -11,10 +11,12 @@ import {
     ChevronLeft,
     ChevronRight,
     X,
+    Home,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { workData } from '@/assets/assets';
+import Link from 'next/link';
 
 const ProjectDetailPage = ({ project }) => {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -86,7 +88,13 @@ const ProjectDetailPage = ({ project }) => {
 
     return (
         <div className="bg-darkTheme text-white min-h-screen">
-            <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center">
+            <header className="relative bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center">
+                <Link href="/#work" className="absolute top-4 left-4 sm:top-6 sm:left-6">
+                    <Button variant="outline" className="bg-transparent text-gray-300 hover:bg-gray-800/50 hover:text-white border-gray-700 flex items-center gap-2 font-Outfit">
+                        <Home className="w-4 h-4" />
+                        Back to Projects
+                    </Button>
+                </Link>
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
