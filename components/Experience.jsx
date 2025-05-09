@@ -95,7 +95,7 @@ const careerExperience = [
     type:"Full-Time",
     company: "BIDI Bildung Digital GmbH",
     location: "Dresden, Germany",
-    period: "May 2023 – Nov 2024",
+    period: "May 2023 – Present",
     highlights: [
       "Built full-stack ed-tech features for better student engagement",
       "Refactored APIs and improved performance and scalability",
