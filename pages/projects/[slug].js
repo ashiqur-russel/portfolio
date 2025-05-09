@@ -2,12 +2,13 @@ import '@/app/globals.css';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/router';
+
 import {
     ArrowUpRight,
     Github,
-    Link,
-    Image,
-    Layout,
+    Link as LucideLink,
+    Image as LucideImage,
     Code2,
     Layers,
     ChevronLeft,
@@ -16,29 +17,7 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-
-// Mock Data 
-const projectData = {
-    title: 'Project title   ',
-    subtitle: 'A Revolutionary Web Application',
-    description:
-        'Project Phoenix is a cutting-edge web application designed to streamline workflows and enhance productivity. Built with a focus on user experience, it offers a range of features, including collaborative document editing, real-time communication, and customizable dashboards.',
-    technologies: ['React', 'Node.js', 'Tailwind CSS', 'PostgreSQL', 'WebSockets'],
-    design: 'Modern, minimalist, and user-friendly interface with a focus on accessibility.',
-    architecture: 'Microservices architecture with a RESTful API and real-time data synchronization.',
-    primaryImage: 'https://placehold.co/1200x600/EEE/31343C',
-    images: [
-        'https://placehold.co/800x600/EEE/31343C',
-        'https://placehold.co/800x600/EEE/31343C',
-        'https://placehold.co/800x600/EEE/31343C',
-        'https://placehold.co/800x600/EEE/31343C',
-    ],
-    links: [
-        { name: 'Live Demo', url: 'https://example.com/phoenix' },
-        { name: 'GitHub Repo', url: 'https://github.com/example/phoenix' },
-    ],
-    caseStudy: null,
-};
+import { workData } from '@/assets/assets';
 
 const ProjectDetailsPage = () => {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -46,34 +25,41 @@ const ProjectDetailsPage = () => {
     const [autoRotate, setAutoRotate] = useState(true);
     const [rotateInterval, setRotateInterval] = useState(5000);
     const galleryIntervalRef = useRef(null);
+    const router = useRouter();
+    const { slug } = router.query;
+    const [project, setProject] = useState(null);
 
-    // Function to open the gallery
+    useEffect(() => {
+        const foundProject = workData.find((item) => item.slug === slug);
+        setProject(foundProject);
+    }, [slug]);
+
     const openGallery = (index) => {
         setSelectedImageIndex(index);
         setIsGalleryOpen(true);
     };
 
-    // Function to close the gallery
     const closeGallery = () => {
         setIsGalleryOpen(false);
         setAutoRotate(true);
     };
 
-    // Function to go to the next image
     const nextImage = useCallback(() => {
-        setSelectedImageIndex((prevIndex) => (prevIndex + 1) % projectData.images.length);
-    }, []);
+        if (project?.images?.length > 0) {
+            setSelectedImageIndex((prevIndex) => (prevIndex + 1) % project.images.length);
+        }
+    }, [project?.images]);
 
-    // Function to go to the previous image
     const prevImage = useCallback(() => {
-        setSelectedImageIndex((prevIndex) =>
-            prevIndex === 0 ? projectData.images.length - 1 : prevIndex - 1
-        );
-    }, []);
+        if (project?.images?.length > 0) {
+            setSelectedImageIndex((prevIndex) =>
+                prevIndex === 0 ? project.images.length - 1 : prevIndex - 1
+            );
+        }
+    }, [project?.images]);
 
-    // Set up auto-rotation when the gallery is open and autoRotate is true
     useEffect(() => {
-        if (isGalleryOpen && autoRotate) {
+        if (isGalleryOpen && autoRotate && project?.images?.length > 1) {
             galleryIntervalRef.current = setInterval(nextImage, rotateInterval);
         } else if (galleryIntervalRef.current) {
             clearInterval(galleryIntervalRef.current);
@@ -85,12 +71,11 @@ const ProjectDetailsPage = () => {
                 clearInterval(galleryIntervalRef.current);
             }
         };
-    }, [isGalleryOpen, autoRotate, nextImage, rotateInterval]);
+    }, [isGalleryOpen, autoRotate, nextImage, rotateInterval, project?.images?.length]);
 
-    // Keyboard navigation for gallery
     useEffect(() => {
         const handleKeyDown = (e) => {
-            if (!isGalleryOpen) return;
+            if (!isGalleryOpen || !project?.images) return;
             if (e.key === 'ArrowLeft') {
                 prevImage();
             } else if (e.key === 'ArrowRight') {
@@ -102,11 +87,16 @@ const ProjectDetailsPage = () => {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [isGalleryOpen, prevImage, nextImage]);
+    }, [isGalleryOpen, prevImage, nextImage, project?.images]);
+
+    if (!project) {
+        return <div className="bg-darkTheme text-white min-h-screen flex items-center justify-center">Loading project details...</div>;
+    }
+
+    const primaryImage = project.bgImage; // Use bgImage as the primary image
 
     return (
         <div className="bg-darkTheme text-white min-h-screen">
-            {/* Project Header */}
             <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -114,10 +104,10 @@ const ProjectDetailsPage = () => {
                     transition={{ duration: 0.8, ease: 'easeInOut' }}
                 >
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-Ovo font-bold tracking-tight">
-                        {projectData.title}
+                        {project.title}
                     </h1>
                     <p className="mt-4 text-lg sm:text-xl text-gray-300 font-Outfit">
-                        {projectData.subtitle}
+                        {project.summary || project.description.substring(0, 100) + '...'}
                     </p>
                 </motion.div>
             </header>
@@ -133,7 +123,7 @@ const ProjectDetailsPage = () => {
                         >
                             <h2 className="text-3xl font-Ovo font-semibold">Project Overview</h2>
                             <p className="text-gray-300 leading-relaxed font-Outfit">
-                                {projectData.description}
+                                {project.description}
                             </p>
                         </motion.div>
 
@@ -143,12 +133,12 @@ const ProjectDetailsPage = () => {
                             transition={{ duration: 0.6 }}
                             viewport={{ once: true }}
                             className="rounded-lg overflow-hidden shadow-lg border border-gray-800 shadow-black"
-                            onClick={() => openGallery(0)}
-                            style={{ cursor: 'pointer' }}
+                            onClick={() => project.images && project.images.length > 0 && openGallery(0)}
+                            style={{ cursor: project?.images?.length > 0 ? 'pointer' : 'default' }}
                         >
                             <img
-                                src={projectData.primaryImage}
-                                alt={projectData.title}
+                                src={primaryImage}
+                                alt={project.title}
                                 className="w-full h-auto object-cover"
                             />
                         </motion.div>
@@ -163,7 +153,7 @@ const ProjectDetailsPage = () => {
                         >
                             <h2 className="text-3xl font-Ovo font-semibold">Tech Stack</h2>
                             <div className="flex flex-wrap gap-2">
-                                {projectData.technologies.map((tech) => (
+                                {project.techStack.map((tech) => (
                                     <Badge
                                         key={tech}
                                         variant="secondary"
@@ -173,26 +163,6 @@ const ProjectDetailsPage = () => {
                                     </Badge>
                                 ))}
                             </div>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
-                        >
-                            <h2 className="text-3xl font-Ovo font-semibold">Design</h2>
-                            <p className="text-gray-300 leading-relaxed font-Outfit">{projectData.design}</p>
-                        </motion.div>
-
-                        <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
-                        >
-                            <h2 className="text-3xl font-Ovo font-semibold">Architecture</h2>
-                            <p className="text-gray-300 leading-relaxed font-Outfit">{projectData.architecture}</p>
                         </motion.div>
                     </div>
                 </div>
@@ -206,59 +176,75 @@ const ProjectDetailsPage = () => {
                 >
                     <h2 className="text-3xl font-Ovo font-semibold mb-6">Explore the Project</h2>
                     <div className="flex flex-wrap gap-4">
-                        {projectData.links.map((link) => (
+                        {project.github && (
                             <Button
-                                key={link.name}
                                 variant="outline"
                                 className="bg-purple-800/80 text-purple-200 hover:bg-purple-700/90 hover:text-purple-100 border-purple-800 flex items-center gap-2 font-Outfit"
                                 asChild
                             >
                                 <a
-                                    href={link.url}
+                                    href={project.github}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2"
                                 >
-                                    {link.name === 'Live Demo' && <Link className="w-4 h-4" />}
-                                    {link.name === 'GitHub Repo' && <Github className="w-4 h-4" />}
-                                    {link.name}
+                                    <Github className="w-4 h-4" />
+                                    GitHub Repo
                                     <ArrowUpRight className="w-4 h-4" />
                                 </a>
                             </Button>
-                        ))}
+                        )}
+                        {project.liveDemo && (
+                            <Button
+                                variant="outline"
+                                className="bg-purple-800/80 text-purple-200 hover:bg-purple-700/90 hover:text-purple-100 border-purple-800 flex items-center gap-2 font-Outfit"
+                                asChild
+                            >
+                                <a
+                                    href={project.liveDemo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2"
+                                >
+                                    <LucideLink className="w-4 h-4" />
+                                    Live Demo
+                                    <ArrowUpRight className="w-4 h-4" />
+                                </a>
+                            </Button>
+                        )}
                     </div>
                 </motion.div>
 
-                {/* Image Gallery */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                    className="mt-12"
-                >
-                    <h2 className="text-3xl font-Ovo font-semibold mb-6">Project Gallery</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {projectData.images.map((image, index) => (
-                            <div
-                                key={index}
-                                className="rounded-lg overflow-hidden shadow-lg border border-gray-800 cursor-pointer transition-transform duration-300 hover:scale-105 shadow-black"
-                                onClick={() => openGallery(index)}
-                            >
-                                <img
-                                    src={image}
-                                    alt={`Project Screenshot ${index + 1}`}
-                                    className="w-full h-48 object-cover"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
+                {project?.images && project.images.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className="mt-12"
+                    >
+                        <h2 className="text-3xl font-Ovo font-semibold mb-6">Project Gallery</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                            {project.images.map((image, index) => (
+                                <div
+                                    key={index}
+                                    className="rounded-lg overflow-hidden shadow-lg border border-gray-800 cursor-pointer transition-transform duration-300 hover:scale-105 shadow-black"
+                                    onClick={() => openGallery(index)}
+                                >
+                                    <img
+                                        src={image}
+                                        alt={`Project Screenshot ${index + 1}`}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                )}
             </main>
 
-            {/* Image Gallery Modal */}
             <AnimatePresence>
-                {isGalleryOpen && (
+                {isGalleryOpen && project?.images && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -275,7 +261,7 @@ const ProjectDetailsPage = () => {
                             </button>
 
                             <motion.img
-                                src={projectData.images[selectedImageIndex]}
+                                src={project.images[selectedImageIndex]}
                                 alt={`Project Gallery ${selectedImageIndex + 1}`}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -315,7 +301,4 @@ const ProjectDetailsPage = () => {
     );
 };
 
-
-
 export default ProjectDetailsPage;
-

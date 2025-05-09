@@ -119,9 +119,10 @@ export const workData1 = [
     },
 ]
 
-export const workData = [
+export const workData_ = [
     {
         title: 'OnBook',
+        slug: 'On-Book',
         summary: 'A full-stack e-commerce book store...',
         description: 'This is a full-featured book store with admin and user roles, shopping cart, payments, etc.',
         bgImage: '/work-1.png',
@@ -134,6 +135,7 @@ export const workData = [
 
     {
         title: 'Link Tutor',
+        slug: 'Link-Tutor',
         description: 'A Online learning platform for students and tutors',
         bgImage: '/work-2.png',
         techStack: ['Typescript', 'NextJs', 'ExpressJs', 'MongoDB', 'Tailwind', 'Stripe', 'JWT',],
@@ -143,6 +145,7 @@ export const workData = [
     },
     {
         title: 'Taskify',
+        slug: 'Taskify',
         description: 'A project management app allows teams to efficiently manage tasks, and collaborate in real-time.',
         bgImage: '/work-3.png',
         techStack: ['Typescript', 'Next.js', 'Tailwind', 'Prisma', 'PostgresSQL', 'ExpressJs'],
@@ -150,6 +153,58 @@ export const workData = [
         liveDemo: 'https://taskify-client-two.vercel.app/projects/1',
         icon: assets.git
 
+    }
+];
+
+
+export const workData = [
+    {
+        title: 'OnBook',
+        slug: 'On-Book',
+        summary: 'A full-stack e-commerce book store...',
+        description: 'This is a full-featured book store with admin and user roles, shopping cart, payments, etc.',
+        bgImage: '/work-1.png',
+        images: ['/work-1.png', '/work-1.png'],
+        techStack: ['Typescript', 'React', 'ExpressJS', 'MongoDB', 'Tailwind', 'Stripe'],
+        github: 'https://github.com/ashiqur-russel/On.Book-Client',
+        liveDemo: 'https://book-on-client.vercel.app/',
+        icon: assets.git,
+        subtitle: 'A Comprehensive Online Bookstore Experience',
+        design: 'Clean, user-friendly interface with easy navigation.',
+        architecture: 'Monolithic architecture with separate frontend and backend.',
+        primaryImage: '/work-1.png',
+        caseStudy: null,
+    },
+
+    {
+        title: 'Link Tutor',
+        slug: 'Link-Tutor',
+        description: 'A Online learning platform for students and tutors',
+        bgImage: '/work-2.png',
+        techStack: ['Typescript', 'NextJs', 'ExpressJs', 'MongoDB', 'Tailwind', 'Stripe', 'JWT',],
+        github: 'https://github.com/ashiqur-russel/LinkTutor',
+        liveDemo: 'https://linktutor.vercel.app/',
+        icon: assets.git,
+        subtitle: 'Connecting Students and Tutors for Effective Learning',
+        design: 'Modern and intuitive design focused on seamless interaction.',
+        architecture: 'Microservices architecture with real-time communication features.',
+        primaryImage: '/work-2.png',
+        caseStudy: null,
+    },
+    {
+        title: 'Taskify',
+        slug: 'Taskify',
+        description: 'A project management app allows teams to efficiently manage tasks, and collaborate in real-time.',
+        bgImage: '/work-3.png',
+        techStack: ['Typescript', 'Next.js', 'Tailwind', 'Prisma', 'PostgresSQL', 'ExpressJs'],
+        github: 'https://github.com/ashiqur-russel/Taskify',
+        liveDemo: 'https://taskify-client-two.vercel.app/projects/1',
+        icon: assets.git,
+        subtitle: 'Real-time Collaboration and Efficient Task Management',
+        design: 'Minimalist and organized interface for enhanced productivity.',
+        architecture: 'Full-stack application with a robust API and database.',
+        primaryImage: '/work-3.png',
+        caseStudy: null,
     }
 ];
 

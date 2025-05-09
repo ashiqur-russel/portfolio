@@ -1,22 +1,19 @@
 import mongoose from 'mongoose';
-import PageVisit from '../../models/PageVisit'; // Import PageVisit model
+import PageVisit from '../../models/PageVisit';
 
 const connectToDatabase = async () => {
     if (mongoose.connections[0].readyState) {
-        return; // Already connected
+        return;
     }
 
-    console.log('Connecting to MongoDB...');  // Log connection attempt
+    console.log('Connecting to MongoDB...');
 
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log('MongoDB connected successfully');  // Log successful connection
+        await mongoose.connect(process.env.MONGODB_URI);
+        console.log('MongoDB connected successfully');
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error);  // Log connection error
-        throw new Error('Failed to connect to MongoDB');  // Throw error if connection fails
+        console.error('Error connecting to MongoDB:', error);
+        throw new Error('Failed to connect to MongoDB');
     }
 };
 

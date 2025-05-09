@@ -5,10 +5,7 @@ const connectToDatabase = async () => {
     if (mongoose.connections[0].readyState) return;
 
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(process.env.MONGODB_URI);
         console.log('MongoDB connected successfully');
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
@@ -19,6 +16,7 @@ const connectToDatabase = async () => {
 const isLocalOrPrivateIP = (ip) => {
     return (
         ip === '127.0.0.1' ||
+        ip === '95.117.250.38' ||
         ip === '::1' ||
         ip.startsWith('192.168') ||
         ip.startsWith('10.') ||
