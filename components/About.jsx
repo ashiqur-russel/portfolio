@@ -58,8 +58,8 @@ const About = ({ isDarkMode }) => {
           className="flex-1 text-center sm:text-left"
         >
           <p className="mb-6 sm:mb-10 max-w-xl mx-auto sm:mx-0 font-Ovo text-sm sm:text-base">
-          I am a Full Stack Developer with expertise in JavaScript, TypeScript, Java, and PHP,
-           along with frameworks such as React, Angular, Next.js, NestJS, Express.js, Tailwind CSS,
+          I am a Software Developer with expertise in JavaScript, TypeScript, Java, and PHP,
+           along with frameworks such as React, Angular, Next.js, NestJS, Express.js, Spring Boot, Tailwind CSS,
             and Bootstrap. With around 2 years of hands-on experience in both frontend and backend development,
              I specialize in crafting scalable, high-performance applications,
            all while ensuring clean, maintainable code that stands the test of time.
