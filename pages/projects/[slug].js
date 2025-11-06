@@ -129,141 +129,257 @@ const ProjectDetailPage = ({ project }) => {
       </header>
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
+        {/* Hero Image Carousel */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl 
+                   border border-gray-800 mb-12 group"
+        >
+          {/* Carousel Images */}
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={selectedImageIndex}
+              src={
+                project?.images?.length > 0
+                  ? project.images[selectedImageIndex]
+                  : primaryImage
+              }
+              alt={`${project.title} - Screenshot ${selectedImageIndex + 1}`}
+              className="w-full h-full object-cover"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+            />
+          </AnimatePresence>
+
+          {/* Carousel Controls */}
+          {project?.images?.length > 1 && (
+            <>
+              {/* Previous Button */}
+              <button
+                onClick={prevImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 
+                         text-white p-3 rounded-full transition-all duration-300 
+                         opacity-0 group-hover:opacity-100 hover:scale-110 z-10"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+
+              {/* Next Button */}
+              <button
+                onClick={nextImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/90 
+                         text-white p-3 rounded-full transition-all duration-300 
+                         opacity-0 group-hover:opacity-100 hover:scale-110 z-10"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Image Indicators */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {project.images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === selectedImageIndex
+                        ? 'bg-purple-500 w-8'
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              {/* Image Counter */}
+              <div
+                className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm 
+                            px-3 py-1.5 rounded-full text-white text-sm font-medium z-10"
+              >
+                {selectedImageIndex + 1} / {project.images.length}
+              </div>
+            </>
+          )}
+
+          {/* Fullscreen Button */}
+          <button
+            onClick={() => openGallery(selectedImageIndex)}
+            className="absolute top-4 left-4 bg-black/70 hover:bg-black/90 backdrop-blur-sm 
+                     px-4 py-2 rounded-full text-white text-sm font-medium 
+                     flex items-center gap-2 transition-all duration-300 z-10
+                     opacity-0 group-hover:opacity-100"
+          >
+            <LucideImage className="w-4 h-4" />
+            View Fullscreen
+          </button>
+        </motion.div>
+
+        {/* Project Info Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {/* Overview - Takes 2 columns */}
+          <div className="lg:col-span-2 space-y-6">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800"
             >
-              <h2 className="text-3xl font-Ovo font-semibold">
-                Project Overview
+              <h2 className="text-2xl font-bold font-Ovo mb-4 flex items-center gap-2">
+                <Layers className="w-6 h-6 text-purple-400" />
+                Overview
               </h2>
-              <p className="text-gray-300 leading-relaxed font-Outfit">
+              <p className="text-gray-300 leading-relaxed text-lg font-Outfit">
                 {project.description}
               </p>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="rounded-lg overflow-hidden shadow-lg border border-gray-800 shadow-black"
-              onClick={() =>
-                project.images && project.images.length > 0 && openGallery(0)
-              }
-              style={{
-                cursor: project?.images?.length > 0 ? 'pointer' : 'default',
-              }}
-            >
-              <img
-                src={primaryImage}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-              />
-            </motion.div>
+            {/* Key Features */}
+            {project.features && project.features.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800"
+              >
+                <h2 className="text-2xl font-bold font-Ovo mb-4 flex items-center gap-2">
+                  <Code2 className="w-6 h-6 text-purple-400" />
+                  Key Features
+                </h2>
+                <ul className="space-y-3">
+                  {project.features.map((feature, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-gray-300 font-Outfit"
+                    >
+                      <span className="text-purple-400 mt-1">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            )}
           </div>
 
-          <div className="space-y-8">
+          {/* Sidebar - Tech Stack & Actions */}
+          <div className="space-y-6">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-800"
             >
-              <h2 className="text-3xl font-Ovo font-semibold">Tech Stack</h2>
+              <h2 className="text-xl font-bold font-Ovo mb-4">Tech Stack</h2>
               <div className="flex flex-wrap gap-2">
                 {project.techStack &&
                   project.techStack.map(tech => (
                     <Badge
                       key={tech}
                       variant="secondary"
-                      className="bg-purple-800/80 text-purple-200 border-purple-800 font-Outfit"
+                      className="bg-purple-900/50 text-purple-200 border-purple-700/50 
+                               hover:bg-purple-800/50 transition-colors font-Outfit"
                     >
                       {tech}
                     </Badge>
                   ))}
               </div>
             </motion.div>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-800 space-y-3"
+            >
+              {project.github && (
+                <Button
+                  variant="outline"
+                  className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white 
+                           hover:from-purple-700 hover:to-purple-800 border-0 
+                           flex items-center justify-center gap-2 font-Outfit h-12"
+                  asChild
+                >
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github className="w-5 h-5" />
+                    View on GitHub
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+              {project.liveDemo && (
+                <Button
+                  variant="outline"
+                  className="w-full bg-gray-800 text-white hover:bg-gray-700 border-gray-700
+                           flex items-center justify-center gap-2 font-Outfit h-12"
+                  asChild
+                >
+                  <a
+                    href={project.liveDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <LucideLink className="w-5 h-5" />
+                    Live Demo
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+            </motion.div>
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-12"
-        >
-          <h2 className="text-3xl font-Ovo font-semibold mb-6">
-            Explore the Project
-          </h2>
-          <div className="flex flex-wrap gap-4">
-            {project.github && (
-              <Button
-                variant="outline"
-                className="bg-purple-800/80 text-purple-200 hover:bg-purple-700/90 hover:text-purple-100 border-purple-800 flex items-center gap-2 font-Outfit"
-                asChild
-              >
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <Github className="w-4 h-4" />
-                  GitHub Repo
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </Button>
-            )}
-            {project.liveDemo && (
-              <Button
-                variant="outline"
-                className="bg-purple-800/80 text-purple-200 hover:bg-purple-700/90 hover:text-purple-100 border-purple-800 flex items-center gap-2 font-Outfit"
-                asChild
-              >
-                <a
-                  href={project.liveDemo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <LucideLink className="w-4 h-4" />
-                  Live Demo
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </Button>
-            )}
-          </div>
-        </motion.div>
-
+        {/* Gallery Section */}
         {project?.images && project.images.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="mt-12"
+            className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800"
           >
-            <h2 className="text-3xl font-Ovo font-semibold mb-6">
+            <h2 className="text-2xl font-bold font-Ovo mb-6 flex items-center gap-2">
+              <LucideImage className="w-6 h-6 text-purple-400" />
               Project Gallery
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {project.images.map((image, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="rounded-lg overflow-hidden shadow-lg border border-gray-800 cursor-pointer transition-transform duration-300 hover:scale-105 shadow-black"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  className="relative aspect-video rounded-xl overflow-hidden 
+                           border border-gray-700 cursor-pointer group
+                           hover:shadow-xl hover:shadow-purple-500/30 transition-all duration-300"
                   onClick={() => openGallery(index)}
                 >
                   <img
                     src={image}
-                    alt={`Project Screenshot ${index + 1}`}
-                    className="w-full h-48 object-cover"
+                    alt={`Screenshot ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                </div>
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent 
+                                opacity-0 group-hover:opacity-100 transition-opacity duration-300
+                                flex items-end justify-center pb-4"
+                  >
+                    <span className="text-white text-sm font-semibold">
+                      Click to view fullscreen
+                    </span>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </motion.div>
