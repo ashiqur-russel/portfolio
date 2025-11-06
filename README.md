@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## CI/CD Pipeline
+
+This project includes a complete CI/CD pipeline with GitHub Actions and Vercel deployment.
+
+**📚 See the [Documentation folder](./Documentation/)** for complete setup and workflow guides:
+- [README_CI_CD.md](./Documentation/README_CI_CD.md) - Main overview
+- [QUICK_START.md](./Documentation/QUICK_START.md) - Quick setup guide
+- [WORKFLOW_DIAGRAM.md](./Documentation/WORKFLOW_DIAGRAM.md) - Visual diagrams
+- [CI-CD-SETUP.md](./Documentation/CI-CD-SETUP.md) - Detailed configuration
+
 ## Getting Started
 
 First, run the development server:

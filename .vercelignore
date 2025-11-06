@@ -1,0 +1,10 @@
+node_modules
+.git
+.github
+*.md
+!README.md
+.prettierrc
+.prettierignore
+.eslintrc*
+eslint.config.*
+
