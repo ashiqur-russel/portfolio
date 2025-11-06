@@ -3,7 +3,7 @@ name: CD - Deploy to Vercel
 on:
   push:
     branches:
-      - main
+      - master
       - development
 
 env:
@@ -22,7 +22,7 @@ jobs:
           check-name: '🔍 ESLint'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-
+          
       - name: Wait for Format Check
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
@@ -30,7 +30,7 @@ jobs:
           check-name: '💅 Format Check'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-
+          
       - name: Wait for Tests
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
@@ -38,7 +38,7 @@ jobs:
           check-name: '🧪 Tests'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-
+          
       - name: Wait for Build
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
@@ -67,13 +67,16 @@ jobs:
         run: npm install --global vercel@latest
 
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/main' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/master' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build Project Artifacts
-        run: vercel build ${{ github.ref == 'refs/heads/main' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel build ${{ github.ref == 'refs/heads/master' && '--prod' || '' }} --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Production
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/master'
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           echo "🚀 Deploying to PRODUCTION: ashiqur-rahman.de"
           vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
@@ -81,7 +84,12 @@ jobs:
 
       - name: Deploy to Staging
         if: github.ref == 'refs/heads/development'
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           echo "🚀 Deploying to STAGING: test.ashiqur-rahman.de"
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-          echo "✅ Staging deployment complete!"
+          URL=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "Deployed to: $URL"
+          vercel alias set $URL test.ashiqur-rahman.de --token=${{ secrets.VERCEL_TOKEN }} --scope=${{ secrets.VERCEL_ORG_ID }}
+          echo "✅ Staging deployment complete and aliased to test.ashiqur-rahman.de"
