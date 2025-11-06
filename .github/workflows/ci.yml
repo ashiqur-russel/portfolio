@@ -3,12 +3,12 @@ name: CI - Code Quality Checks
 on:
   push:
     branches:
-      - main
+      - master
       - development
       - 'feature/**'
   pull_request:
     branches:
-      - main
+      - master
       - development
 
 env:
