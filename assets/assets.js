@@ -183,9 +183,10 @@ export const workData = [
   {
     title: 'OnBook',
     slug: 'On-Book',
-    summary: 'A full-stack e-commerce book store...',
+    summary:
+      'A full-stack e-commerce bookstore with secure payments and admin dashboard',
     description:
-      'This is a full-featured book store with admin and user roles, shopping cart, payments, etc.',
+      'OnBook is a comprehensive online bookstore that provides a seamless shopping experience for book lovers. Built with modern technologies, it features user authentication, shopping cart management, secure payment processing with Stripe, and a powerful admin dashboard for inventory management.',
     bgImage: '/work-1.png',
     images: ['/work-1.png', '/work-1.png'],
     techStack: [
@@ -195,6 +196,15 @@ export const workData = [
       'MongoDB',
       'Tailwind',
       'Stripe',
+    ],
+    features: [
+      'Role-based authentication (Admin & User) with JWT',
+      'Shopping cart with real-time price calculation',
+      'Secure payment integration with Stripe',
+      'Admin dashboard for book inventory management',
+      'Advanced search and filtering capabilities',
+      'Order history and tracking system',
+      'Responsive design for all devices',
     ],
     github: 'https://github.com/ashiqur-russel/On.Book-Client',
     liveDemo: 'https://book-on-client.vercel.app/',
@@ -209,7 +219,10 @@ export const workData = [
   {
     title: 'Link Tutor',
     slug: 'Link-Tutor',
-    description: 'A Online learning platform for students and tutors',
+    summary:
+      'An online learning platform connecting students with professional tutors',
+    description:
+      'Link Tutor is a comprehensive online tutoring platform that bridges the gap between students and qualified tutors. The platform enables seamless scheduling, video conferencing, payment processing, and progress tracking, making online education accessible and effective.',
     bgImage: '/work-2.png',
     techStack: [
       'Typescript',
@@ -219,6 +232,15 @@ export const workData = [
       'Tailwind',
       'Stripe',
       'JWT',
+    ],
+    features: [
+      'Real-time tutor availability and booking system',
+      'Secure video conferencing integration',
+      'Payment processing with Stripe for session fees',
+      'Student and tutor profile management',
+      'Rating and review system',
+      'Session history and progress tracking',
+      'Automated email notifications and reminders',
     ],
     github: 'https://github.com/ashiqur-russel/LinkTutor',
     liveDemo: 'https://linktutor.vercel.app/',
@@ -233,8 +255,9 @@ export const workData = [
   {
     title: 'Taskify',
     slug: 'Taskify',
+    summary: 'A powerful project management platform for agile teams',
     description:
-      'A project management app allows teams to efficiently manage tasks, and collaborate in real-time.',
+      'Taskify is a modern project management application that empowers teams to organize work, track progress, and collaborate efficiently. Built with cutting-edge technologies, it provides a Trello-like experience with additional features for team productivity and real-time collaboration.',
     bgImage: '/work-3.png',
     techStack: [
       'Typescript',
@@ -243,6 +266,15 @@ export const workData = [
       'Prisma',
       'PostgresSQL',
       'ExpressJs',
+    ],
+    features: [
+      'Kanban-style boards with drag-and-drop functionality',
+      'Real-time collaboration with multiple team members',
+      'Task assignment and priority management',
+      'Project templates for quick setup',
+      'Activity logs and project analytics',
+      'File attachments and comments on tasks',
+      'Mobile-responsive design for on-the-go management',
     ],
     github: 'https://github.com/ashiqur-russel/Taskify',
     liveDemo: 'https://taskify-client-two.vercel.app/projects/1',
@@ -288,21 +320,22 @@ export const infoList = [
   {
     icon: assets.code_icon,
     iconDark: assets.code_icon_dark,
-    title: 'Languages',
+    title: 'Full-Stack Expertise',
     description:
-      'Typescript, Angular, React, NextJs, NodeJs, ExpressJs, NestJs',
+      'Building scalable applications with modern JavaScript/TypeScript ecosystems and cloud-native architectures',
   },
   {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
     title: 'Education',
-    description: 'Masters Automotive Software Engineering',
+    description: 'M.Sc. Automotive Software Engineering',
   },
   {
     icon: assets.project_icon,
     iconDark: assets.project_icon_dark,
-    title: 'Projects',
-    description: 'Built more than 5 pet projects',
+    title: 'Impact-Driven',
+    description:
+      'Delivered solutions serving 500+ partners and thousands of users across multiple industries',
   },
 ];
 
