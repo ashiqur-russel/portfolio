@@ -87,7 +87,7 @@ export default Experience;
 
 const careerExperience = [
   {
-    role: 'Full-Stack Developer & Team Lead',
+    role: 'Full-Stack Developer',
     type: 'Full-Time',
     company: 'AFQ I Service GmbH',
     location: 'Karlsruhe, Germany',
