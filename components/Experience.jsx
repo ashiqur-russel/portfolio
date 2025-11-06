@@ -87,11 +87,26 @@ export default Experience;
 
 const careerExperience = [
   {
+    role: 'Full-Stack Developer & Team Lead',
+    type: 'Full-Time',
+    company: 'AFQ I Service GmbH',
+    location: 'Karlsruhe, Germany',
+    period: 'Aug 2024 – Present',
+    highlights: [
+      'Leading a development team in restructuring legacy applications for improved scalability and maintainability',
+      'Architecting and implementing modern full-stack solutions with focus on performance optimization',
+      'Establishing DevOps practices and CI/CD pipelines to automate deployment processes',
+      'Driving technical decisions and code quality standards across the team',
+      'Implementing automated testing strategies and monitoring solutions',
+      'Reducing deployment time by 60% through infrastructure automation',
+    ],
+  },
+  {
     role: 'Full-Stack Developer',
     type: 'Full-Time',
     company: 'BIDI Bildung Digital GmbH',
     location: 'Dresden, Germany',
-    period: 'May 2023 – Present',
+    period: 'May 2023 – Jul 2024',
     highlights: [
       'Built full-stack ed-tech features for better student engagement',
       'Refactored APIs and improved performance and scalability',

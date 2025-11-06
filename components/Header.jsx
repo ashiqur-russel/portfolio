@@ -41,9 +41,9 @@ const Header = () => {
         transition={{ duration: 0.6, delay: 0.7 }}
         className="max-w-2xl mx-auto font-Ovo"
       >
-        I am a Software Developer from Dresden, Germany, with two years of
-        full-time experience at bidi Bildung Digital GmbH and one year as an
-        intern and working student at Bosch.
+        I am a Full-Stack Developer & Team Lead at AFQ I Service GmbH in
+        Karlsruhe, Germany, with experience in building scalable applications,
+        leading development teams, and implementing DevOps automation.
       </motion.p>
 
       <div className="flex flex-col sm:flex-row items-center gap-4 mt-4">
