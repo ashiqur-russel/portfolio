@@ -25,24 +25,6 @@ const ProjectDetailPage = ({ project }) => {
   const [rotateInterval, setRotateInterval] = useState(5000);
   const galleryIntervalRef = useRef(null);
 
-  if (!project) {
-    return (
-      <div className="bg-darkTheme text-white min-h-screen flex items-center justify-center">
-        Project not found
-      </div>
-    );
-  }
-
-  const openGallery = index => {
-    setSelectedImageIndex(index);
-    setIsGalleryOpen(true);
-  };
-
-  const closeGallery = () => {
-    setIsGalleryOpen(false);
-    setAutoRotate(true);
-  };
-
   const nextImage = useCallback(() => {
     if (project?.images?.length > 0) {
       setSelectedImageIndex(
@@ -95,6 +77,25 @@ const ProjectDetailPage = ({ project }) => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isGalleryOpen, prevImage, nextImage, project?.images]);
+
+  // Early return after all hooks
+  if (!project) {
+    return (
+      <div className="bg-darkTheme text-white min-h-screen flex items-center justify-center">
+        Project not found
+      </div>
+    );
+  }
+
+  const openGallery = index => {
+    setSelectedImageIndex(index);
+    setIsGalleryOpen(true);
+  };
+
+  const closeGallery = () => {
+    setIsGalleryOpen(false);
+    setAutoRotate(true);
+  };
 
   const primaryImage = project.primaryImage || project.bgImage;
 

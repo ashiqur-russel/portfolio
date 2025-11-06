@@ -1,4 +1,8 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { User, Calendar, Clock, ArrowRight } from 'lucide-react';
 
 const PostPreview = ({ post, onSelectPost }) => {
   const [selectedPost, setSelectedPost] = useState(null);
