@@ -288,21 +288,22 @@ export const infoList = [
   {
     icon: assets.code_icon,
     iconDark: assets.code_icon_dark,
-    title: 'Languages',
+    title: 'Full-Stack Expertise',
     description:
-      'Typescript, Angular, React, NextJs, NodeJs, ExpressJs, NestJs',
+      'Building scalable applications with modern JavaScript/TypeScript ecosystems and cloud-native architectures',
   },
   {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
     title: 'Education',
-    description: 'Masters Automotive Software Engineering',
+    description: 'M.Sc. Automotive Software Engineering',
   },
   {
     icon: assets.project_icon,
     iconDark: assets.project_icon_dark,
-    title: 'Projects',
-    description: 'Built more than 5 pet projects',
+    title: 'Impact-Driven',
+    description:
+      'Delivered solutions serving 500+ partners and thousands of users across multiple industries',
   },
 ];
 
