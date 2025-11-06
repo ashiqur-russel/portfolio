@@ -22,7 +22,7 @@ jobs:
           check-name: '🔍 ESLint'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-          
+
       - name: Wait for Format Check
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
@@ -30,7 +30,7 @@ jobs:
           check-name: '💅 Format Check'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-          
+
       - name: Wait for Tests
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
@@ -38,7 +38,7 @@ jobs:
           check-name: '🧪 Tests'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
-          
+
       - name: Wait for Build
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
