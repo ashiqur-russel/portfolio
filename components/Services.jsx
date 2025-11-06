@@ -1,25 +1,25 @@
-import { assets } from "@/assets/assets";
-import Image from "next/image";
-import React from "react";
-import { motion } from "motion/react";
+import { assets } from '@/assets/assets';
+import Image from 'next/image';
+import React from 'react';
+import { motion } from 'motion/react';
 
 const solutionData = [
   {
-    title: "Research & Planning",
+    title: 'Research & Planning',
     description:
-      "I start by gathering requirements, understanding user/client needs, and outlining clear goals and a scope for the project.",
+      'I start by gathering requirements, understanding user/client needs, and outlining clear goals and a scope for the project.',
     icon: assets.research,
   },
   {
-    title: "Design & Development",
+    title: 'Design & Development',
     description:
       "In this phase, I focus on building the application's architecture, developing key features, and integrating the front-end and back-end components.",
     icon: assets.designApproach,
   },
   {
-    title: "Testing & Deployment",
+    title: 'Testing & Deployment',
     description:
-      "Finally, I test the application to fix any issues and ensure it works perfectly. After that, I deploy the application and make it ready for users, with ongoing updates as needed.",
+      'Finally, I test the application to fix any issues and ensure it works perfectly. After that, I deploy the application and make it ready for users, with ongoing updates as needed.',
     icon: assets.startup,
   },
 ];

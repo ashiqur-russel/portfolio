@@ -1,21 +1,21 @@
-import { assets } from "@/assets/assets";
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import { assets } from '@/assets/assets';
+import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useRef, useState } from 'react';
 
 const Navbar = ({ isDarkMode, setIsDarkMode }) => {
   const [isScroll, setIsScroll] = useState(false);
   const sideMenuRef = useRef();
 
   const openMenu = () => {
-    sideMenuRef.current.style.transform = "translateX(-16rem)";
+    sideMenuRef.current.style.transform = 'translateX(-16rem)';
   };
   const closeMenu = () => {
-    sideMenuRef.current.style.transform = "translateX(16rem)";
+    sideMenuRef.current.style.transform = 'translateX(16rem)';
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
         setIsScroll(true);
       } else {
@@ -33,8 +33,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
       <nav
         className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50 ${
           isScroll
-            ? "bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20"
-            : ""
+            ? 'bg-white bg-opacity-50 backdrop-blur-lg shadow-sm dark:bg-darkTheme dark:shadow-white/20'
+            : ''
         }`}
       >
         {/* ✅ Updated: Using text instead of image */}
@@ -47,8 +47,8 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
         <ul
           className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
             isScroll
-              ? ""
-              : "bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent"
+              ? ''
+              : 'bg-white shadow-sm bg-opacity-50 dark:border dark:border-white/50 dark:bg-transparent'
           }`}
         >
           <li>
@@ -84,7 +84,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
         </ul>
 
         <div className="flex items-center gap-4">
-          <button onClick={() => setIsDarkMode((prev) => !prev)}>
+          <button onClick={() => setIsDarkMode(prev => !prev)}>
             <Image
               src={isDarkMode ? assets.sun_icon : assets.moon_icon}
               alt=""

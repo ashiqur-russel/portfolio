@@ -1,26 +1,29 @@
-'use client'
-import { useEffect, useState } from "react";
-import About from "../components/About";
-import Contact from "../components/Contact";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import Navbar from "../components/Navbar";
-import Services from "../components/Services";
-import Work from "../components/Work";
-import ClickTracker from "@/components/ClickTracker";
-import Experience from "@/components/Experience";
+'use client';
+import { useEffect, useState } from 'react';
+import About from '../components/About';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import Navbar from '../components/Navbar';
+import Services from '../components/Services';
+import Work from '../components/Work';
+import ClickTracker from '@/components/ClickTracker';
+import Experience from '@/components/Experience';
 
 export default function Home() {
-
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setIsDarkMode(true)
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      setIsDarkMode(true);
     } else {
-      setIsDarkMode(false)
+      setIsDarkMode(false);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -30,7 +33,7 @@ export default function Home() {
       document.documentElement.classList.remove('dark');
       localStorage.theme = '';
     }
-  }, [isDarkMode])
+  }, [isDarkMode]);
 
   return (
     <>

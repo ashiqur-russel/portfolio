@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useEffect } from 'react';
 import axios from 'axios';
 
@@ -6,7 +6,9 @@ const ClickTracker = () => {
   useEffect(() => {
     const getUserDetails = async () => {
       try {
-        const { data } = await axios.get('https://ipinfo.io?token=dc8350ead2a2ca');
+        const { data } = await axios.get(
+          'https://ipinfo.io?token=dc8350ead2a2ca'
+        );
 
         // Prevent sending data if IP is local or private
         const ip = data.ip || '';

@@ -1,8 +1,8 @@
-import { assets, workData } from "@/assets/assets";
-import Image from "next/image";
-import React from "react";
-import { motion } from "motion/react";
-import Link from "next/link";
+import { assets, workData } from '@/assets/assets';
+import Image from 'next/image';
+import React from 'react';
+import { motion } from 'motion/react';
+import Link from 'next/link';
 
 const Work = ({ isDarkMode }) => {
   return (
@@ -60,7 +60,7 @@ const Work = ({ isDarkMode }) => {
                 src={project.bgImage}
                 alt={project.title}
                 fill
-                sizes="100%"  
+                sizes="100%"
                 objectFit="fill"
                 className="transition-transform duration-300 group-hover:scale-105"
               />
@@ -88,13 +88,13 @@ const Work = ({ isDarkMode }) => {
               </div>
 
               {/* Links - Aligned at bottom */}
-              <div className="flex items-center justify-between mt-auto pt-5" >
-              <Link href={`/projects/${encodeURIComponent(project.slug)}`} 
-                    className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-yellow-600 rounded-lg hover:bg-gray-700 transition"
- >
+              <div className="flex items-center justify-between mt-auto pt-5">
+                <Link
+                  href={`/projects/${encodeURIComponent(project.slug)}`}
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-yellow-600 rounded-lg hover:bg-gray-700 transition"
+                >
                   View Details
-           
-              </Link>
+                </Link>
                 {/* GitHub Button */}
                 <Link
                   href={project.github}

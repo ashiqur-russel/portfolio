@@ -63,6 +63,7 @@ git push origin feature/setup-ci-cd
 **Read the full setup guide:** `CI-CD-SETUP.md`
 
 Key actions:
+
 1. ⚠️ **Disable auto-deployments in Vercel** (Settings → Git)
 2. 🔑 **Add GitHub Secrets** (VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID)
 3. 🔒 **Set up branch protection** (for development and main branches)
@@ -120,26 +121,31 @@ npm run ci           # Run all CI checks locally
 ## What Happens Now
 
 ### ✅ On Feature Branch Push
+
 - CI checks run (lint, format, type-check, test, build)
 - No deployment
 - Fast feedback on code quality
 
 ### ✅ On PR to Development
+
 - CI checks run
 - **PR is blocked if CI fails**
 - Can only merge if all checks pass
 
 ### ✅ On Merge to Development
+
 - CI checks run
 - **Auto-deploys to test.ashiqur-rahman.de**
 - Test your changes on staging
 
 ### ✅ On PR to Main
+
 - CI checks run
 - **PR is blocked if CI fails**
 - Requires review (once branch protection is set)
 
 ### ✅ On Merge to Main
+
 - CI checks run
 - **Auto-deploys to ashiqur-rahman.de (production)**
 - Your changes are live!
@@ -154,20 +160,22 @@ npm run ci           # Run all CI checks locally
 ## Troubleshooting
 
 **CI fails?**
+
 - Run `npm run ci` locally to see the exact error
 - Fix the issue
 - Commit and push again
 
 **Deployment fails?**
+
 - Check GitHub Secrets are configured
 - Verify Vercel integration is set up
 - See full troubleshooting in `CI-CD-SETUP.md`
 
 **Need help?**
+
 - Read the full guide: `CI-CD-SETUP.md`
 - Check GitHub Actions logs for detailed error messages
 
 ---
 
 **Next:** Read `CI-CD-SETUP.md` for complete setup instructions!
-

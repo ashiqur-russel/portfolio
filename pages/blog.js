@@ -2,33 +2,27 @@ import '@/app/globals.css';
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-    Calendar,
-    User,
-    Tag,
-    Clock,
-    ArrowRight,
-    Home
-} from 'lucide-react';
+import { Calendar, User, Tag, Clock, ArrowRight, Home } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 // Mock Data for Blog Posts (Replace with your actual data source)
 const blogPosts = [
-    {
-        id: '1',
-        title: 'The Future of Web Development',
-        summary: 'Explore the latest trends and technologies shaping the future of web development.',
-        date: '2024-07-28',
-        author: 'Jane Doe',
-        tags: ['Web Development', 'Technology', 'Future'],
-        readingTime: 8,
-        imageUrl: 'https://placehold.co/800x400/EEE/31343C',
-        content: `
+  {
+    id: '1',
+    title: 'The Future of Web Development',
+    summary:
+      'Explore the latest trends and technologies shaping the future of web development.',
+    date: '2024-07-28',
+    author: 'Jane Doe',
+    tags: ['Web Development', 'Technology', 'Future'],
+    readingTime: 8,
+    imageUrl: 'https://placehold.co/800x400/EEE/31343C',
+    content: `
 ## The Future of Web Development
 
 Web development is a rapidly evolving field, with new technologies and trends emerging all the time. In this article, we'll explore some of the most exciting developments on the horizon.
@@ -52,17 +46,18 @@ These trends are transforming the way we build and experience the web.  We can e
 
 The future of web development is bright, and it's an exciting time to be a part of this dynamic field.
         `,
-    },
-    {
-        id: '2',
-        title: 'Mastering React Hooks',
-        summary: 'A comprehensive guide to understanding and effectively using React Hooks.',
-        date: '2024-07-25',
-        author: 'John Smith',
-        tags: ['React', 'Hooks', 'Frontend'],
-        readingTime: 12,
-        imageUrl: 'https://placehold.co/800x400/EEE/31343C',
-        content: `
+  },
+  {
+    id: '2',
+    title: 'Mastering React Hooks',
+    summary:
+      'A comprehensive guide to understanding and effectively using React Hooks.',
+    date: '2024-07-25',
+    author: 'John Smith',
+    tags: ['React', 'Hooks', 'Frontend'],
+    readingTime: 12,
+    imageUrl: 'https://placehold.co/800x400/EEE/31343C',
+    content: `
 ## Mastering React Hooks
 
 React Hooks are a powerful feature that allows you to use state and other React features in functional components.  In this guide, we'll dive deep into how to use them effectively.
@@ -88,17 +83,18 @@ Before Hooks, stateful logic could only be used within class components.  Hooks 
 
 By mastering React Hooks, you can write cleaner, more efficient, and more maintainable React code.
         `,
-    },
-    {
-        id: '3',
-        title: 'Building Accessible Websites',
-        summary: 'Learn how to create websites that are accessible to everyone, including users with disabilities.',
-        date: '2024-07-20',
-        author: 'Alice Johnson',
-        tags: ['Accessibility', 'Web Development', 'Best Practices'],
-        readingTime: 10,
-        imageUrl: 'https://placehold.co/800x400/EEE/31343C',
-        content: `
+  },
+  {
+    id: '3',
+    title: 'Building Accessible Websites',
+    summary:
+      'Learn how to create websites that are accessible to everyone, including users with disabilities.',
+    date: '2024-07-20',
+    author: 'Alice Johnson',
+    tags: ['Accessibility', 'Web Development', 'Best Practices'],
+    readingTime: 10,
+    imageUrl: 'https://placehold.co/800x400/EEE/31343C',
+    content: `
 ## Building Accessible Websites
 
 Web accessibility is the practice of making websites usable by as many people as possible, including those with disabilities.  It's not just a nice-to-have; it's an ethical and often legal requirement.
@@ -128,203 +124,226 @@ The Web Content Accessibility Guidelines (WCAG) are the international standard f
 
 By following these guidelines, you can create websites that are accessible to everyone and provide a better experience for all users.
         `,
-    },
+  },
 ];
 
 // Component to display a single blog post preview
 const PostPreview = ({ post, onSelectPost }) => {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-            onClick={() => onSelectPost(post.id)}
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="bg-gray-800 rounded-lg shadow-lg border border-gray-700 overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+      onClick={() => onSelectPost(post.id)}
+    >
+      <img
+        src={post.imageUrl}
+        alt={post.title}
+        className="w-full h-48 object-cover"
+      />
+      <div className="p-6 space-y-4">
+        <h2 className="text-2xl font-Ovo font-semibold text-white">
+          {post.title}
+        </h2>
+        <p className="text-gray-300 leading-relaxed font-Outfit">
+          {post.summary}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {post.tags.map(tag => (
+            <Badge key={tag} variant="secondary" className="font-Outfit">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+        <div className="flex items-center text-gray-400 text-sm font-Outfit">
+          <User className="w-4 h-4 mr-1" />
+          <span>{post.author}</span>
+          <span className="mx-2">•</span>
+          <Calendar className="w-4 h-4 mr-1" />
+          <span>{post.date}</span>
+          <span className="mx-2">•</span>
+          <Clock className="w-4 h-4 mr-1" />
+          <span>{post.readingTime} min read</span>
+        </div>
+        <Button
+          variant="outline"
+          className="text-purple-200 hover:text-purple-100 hover:bg-purple-700/90 border-purple-800 font-Outfit"
         >
-            <img
-                src={post.imageUrl}
-                alt={post.title}
-                className="w-full h-48 object-cover"
-            />
-            <div className="p-6 space-y-4">
-                <h2 className="text-2xl font-Ovo font-semibold text-white">{post.title}</h2>
-                <p className="text-gray-300 leading-relaxed font-Outfit">{post.summary}</p>
-                <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary" className="font-Outfit">
-                            {tag}
-                        </Badge>
-                    ))}
-                </div>
-                <div className="flex items-center text-gray-400 text-sm font-Outfit">
-                    <User className="w-4 h-4 mr-1" />
-                    <span>{post.author}</span>
-                    <span className="mx-2">•</span>
-                    <Calendar className="w-4 h-4 mr-1" />
-                    <span>{post.date}</span>
-                    <span className="mx-2">•</span>
-                    <Clock className="w-4 h-4 mr-1" />
-                    <span>{post.readingTime} min read</span>
-                </div>
-                <Button variant="outline" className="text-purple-200 hover:text-purple-100 hover:bg-purple-700/90 border-purple-800 font-Outfit">
-                    Read More <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-            </div>
-        </motion.div>
-    );
+          Read More <ArrowRight className="w-4 h-4 ml-1" />
+        </Button>
+      </div>
+    </motion.div>
+  );
 };
 
 // Component to display a single blog post
 const PostPage = ({ post, onBack }) => {
+  const parseMarkdown = markdown => {
+    const paragraphs = markdown.split('\n\n');
+    return paragraphs.map((p, index) => {
+      if (p.startsWith('# ')) {
+        return (
+          <h1 key={index} className="text-3xl font-bold my-4">
+            {p.slice(2)}
+          </h1>
+        );
+      } else if (p.startsWith('## ')) {
+        return (
+          <h2 key={index} className="text-2xl font-semibold my-3">
+            {p.slice(3)}
+          </h2>
+        );
+      } else if (p.startsWith('### ')) {
+        return (
+          <h3 key={index} className="text-xl font-medium my-2">
+            {p.slice(4)}
+          </h3>
+        );
+      } else {
+        return (
+          <p key={index} className="text-gray-300 leading-relaxed font-Outfit">
+            {p}
+          </p>
+        );
+      }
+    });
+  };
+  return (
+    <div className="bg-darkTheme text-white min-h-screen">
+      <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center relative">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeInOut' }}
+        >
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-Ovo font-bold tracking-tight">
+            {post.title}
+          </h1>
+          <div className="flex items-center justify-center mt-4 text-gray-400 text-lg font-Outfit">
+            <User className="w-5 h-5 mr-1" />
+            <span>{post.author}</span>
+            <span className="mx-2">•</span>
+            <Calendar className="w-5 h-5 mr-1" />
+            <span>{post.date}</span>
+            <span className="mx-2">•</span>
+            <Clock className="w-5 h-5 mr-1" />
+            <span>{post.readingTime} min read</span>
+          </div>
+        </motion.div>
+        <button
+          onClick={onBack}
+          className="absolute top-4 left-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit"
+        >
+          <ArrowRight className="w-6 h-6 rotate-180" />
+        </button>
+      </header>
 
-    const parseMarkdown = (markdown) => {
-        const paragraphs = markdown.split('\n\n');
-        return paragraphs.map((p, index) => {
-            if (p.startsWith('# ')) {
-                return <h1 key={index} className="text-3xl font-bold my-4">{p.slice(2)}</h1>;
-            } else if (p.startsWith('## ')) {
-                return <h2 key={index} className="text-2xl font-semibold my-3">{p.slice(3)}</h2>;
-            } else if (p.startsWith('### ')) {
-                return <h3 key={index} className="text-xl font-medium my-2">{p.slice(4)}</h3>;
-            } else {
-                return <p key={index} className="text-gray-300 leading-relaxed font-Outfit">{p}</p>;
-            }
-        });
-    };
-    return (
-        <div className="bg-darkTheme text-white min-h-screen">
-            <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center relative">
-                <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: 'easeInOut' }}
-                >
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-Ovo font-bold tracking-tight">
-                        {post.title}
-                    </h1>
-                    <div className="flex items-center justify-center mt-4 text-gray-400 text-lg font-Outfit">
-                        <User className="w-5 h-5 mr-1" />
-                        <span>{post.author}</span>
-                        <span className="mx-2">•</span>
-                        <Calendar className="w-5 h-5 mr-1" />
-                        <span>{post.date}</span>
-                        <span className="mx-2">•</span>
-                        <Clock className="w-5 h-5 mr-1" />
-                        <span>{post.readingTime} min read</span>
-                    </div>
-                </motion.div>
-                <button
-                    onClick={onBack}
-                    className="absolute top-4 left-4 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit"
-                >
-                    <ArrowRight className="w-6 h-6 rotate-180" />
-                </button>
-            </header>
-
-            <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="prose prose-invert max-w-3xl mx-auto space-y-6"
-                >
-                    <img
-                        src={post.imageUrl}
-                        alt={post.title}
-                        className="w-full rounded-lg shadow-lg border border-gray-700"
-                    />
-                    {parseMarkdown(post.content)}
-                </motion.div>
-            </main>
-        </div>
-    );
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="prose prose-invert max-w-3xl mx-auto space-y-6"
+        >
+          <img
+            src={post.imageUrl}
+            alt={post.title}
+            className="w-full rounded-lg shadow-lg border border-gray-700"
+          />
+          {parseMarkdown(post.content)}
+        </motion.div>
+      </main>
+    </div>
+  );
 };
 
 const BlogPage = () => {
-    const [selectedPost, setSelectedPost] = useState(null);
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const router = useRouter();
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const router = useRouter();
 
-    useEffect(() => {
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            setIsDarkMode(true)
-        } else {
-            setIsDarkMode(false)
-        }
-    }, [])
-
-    useEffect(() => {
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-            localStorage.theme = 'dark';
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.theme = '';
-        }
-    }, [isDarkMode])
-
-    const handlePostSelect = (postId) => {
-        setSelectedPost(postId);
-    };
-
-    const handleBackToBlog = () => {
-        setSelectedPost(null);
+  useEffect(() => {
+    if (
+      localStorage.theme === 'dark' ||
+      (!('theme' in localStorage) &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ) {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
     }
+  }, []);
 
-    const handleBackHome = () => {
-        router.push('/');
-    };
-
-
-    if (selectedPost) {
-        const post = blogPosts.find(p => p.id === selectedPost);
-        return <PostPage post={post} onBack={handleBackToBlog} />;
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.theme = 'dark';
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.theme = '';
     }
-    return (
-        <>
-            <div className="bg-darkTheme text-white min-h-screen">
-                <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center relative">
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: 'easeInOut' }}
-                    >
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-Ovo font-bold tracking-tight">
-                            Our Blog
-                        </h1>
-                        <p className="mt-4 text-lg sm:text-xl text-gray-300 font-Outfit">
-                            Insights and articles on web development, design, and technology.
-                        </p>
+  }, [isDarkMode]);
 
-                    </motion.div>
-                    <div className="absolute top-4 left-4">
-                        <button
-                            onClick={handleBackHome}
-                            className={cn(
-                                "bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit",
-                            )}
-                        >
-                            <Home className="w-6 h-6" />
-                        </button>
-                    </div>
-                </header>
+  const handlePostSelect = postId => {
+    setSelectedPost(postId);
+  };
 
-                <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {blogPosts.map((post) => (
-                            <PostPreview
-                                key={post.id}
-                                post={post}
-                                onSelectPost={handlePostSelect}
-                            />
-                        ))}
-                    </div>
-                </main>
-            </div>
-            <Footer />
-        </>
-    );
+  const handleBackToBlog = () => {
+    setSelectedPost(null);
+  };
+
+  const handleBackHome = () => {
+    router.push('/');
+  };
+
+  if (selectedPost) {
+    const post = blogPosts.find(p => p.id === selectedPost);
+    return <PostPage post={post} onBack={handleBackToBlog} />;
+  }
+  return (
+    <>
+      <div className="bg-darkTheme text-white min-h-screen">
+        <header className="bg-gradient-to-br from-gray-900 via-purple-900 to-black py-16 px-4 sm:px-6 lg:px-8 text-center relative">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-Ovo font-bold tracking-tight">
+              Our Blog
+            </h1>
+            <p className="mt-4 text-lg sm:text-xl text-gray-300 font-Outfit">
+              Insights and articles on web development, design, and technology.
+            </p>
+          </motion.div>
+          <div className="absolute top-4 left-4">
+            <button
+              onClick={handleBackHome}
+              className={cn(
+                'bg-black/50 text-white rounded-full p-2 hover:bg-black/70 z-10 font-Outfit'
+              )}
+            >
+              <Home className="w-6 h-6" />
+            </button>
+          </div>
+        </header>
+
+        <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.map(post => (
+              <PostPreview
+                key={post.id}
+                post={post}
+                onSelectPost={handlePostSelect}
+              />
+            ))}
+          </div>
+        </main>
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default BlogPage;
-

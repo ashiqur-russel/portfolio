@@ -114,7 +114,7 @@
 1. Create Feature Branch
    ▼
    git checkout -b feature/new-feature
-   
+
 2. Write Code & Push
    ▼
    git push origin feature/new-feature
@@ -127,7 +127,7 @@
    │ - Test ✅               │
    │ - Build ✅              │
    └─────────────────────────┘
-   
+
 3. Create PR to Development
    ▼
    PR: feature/new-feature → development
@@ -149,7 +149,7 @@
    └─────────────────────────┘     └─────────────────────────┘
    ▼
    test.ashiqur-rahman.de Updated ✅
-   
+
 5. Test on Staging
    ▼
    Test manually on test.ashiqur-rahman.de
@@ -178,7 +178,7 @@
    └─────────────────────────┘     └─────────────────────────┘
    ▼
    ashiqur-rahman.de Updated ✅
-   
+
    🎉 Feature is LIVE in Production!
 ```
 
@@ -299,4 +299,3 @@ Push to main
 - **Main branch**: CI + CD to production
 - **All PRs**: CI must pass before merge
 - **Deployment**: Only happens after CI passes
-

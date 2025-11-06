@@ -18,7 +18,7 @@ jobs:
   code-quality:
     name: Code Quality Checks
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -46,7 +46,7 @@ jobs:
 
       - name: Build project
         run: npm run build
-        
+
       - name: CI Summary
         if: success()
         run: |
@@ -56,4 +56,3 @@ jobs:
           echo "- Type Check: ✅"
           echo "- Tests: ✅"
           echo "- Build: ✅"
-

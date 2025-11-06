@@ -9,28 +9,36 @@ This folder contains all documentation related to the CI/CD setup, workflows, an
 ## 📖 Reading Guide
 
 ### 1. **Start Here: [README_CI_CD.md](./README_CI_CD.md)** ⭐
+
 Main overview of the CI/CD pipeline
+
 - What's included
 - Quick overview
 - Benefits
 - Next steps
 
 ### 2. **Quick Setup: [QUICK_START.md](./QUICK_START.md)** ⚡
+
 For immediate action
+
 - Installation steps
 - First commands to run
 - Quick workflow overview
 - Available commands
 
 ### 3. **Visual Guide: [WORKFLOW_DIAGRAM.md](./WORKFLOW_DIAGRAM.md)** 📊
+
 Understand the flow
+
 - Visual workflow diagrams
 - Step-by-step flow charts
 - Branch interaction diagrams
 - Complete development flow
 
 ### 4. **Detailed Setup: [CI-CD-SETUP.md](./CI-CD-SETUP.md)** 🔧
+
 Complete configuration guide
+
 - Vercel configuration
 - GitHub Secrets setup
 - Branch protection rules
@@ -39,29 +47,35 @@ Complete configuration guide
 ## 🚀 Quick Links
 
 ### For First Time Setup
+
 1. Read [README_CI_CD.md](./README_CI_CD.md)
 2. Follow [QUICK_START.md](./QUICK_START.md)
 3. Configure using [CI-CD-SETUP.md](./CI-CD-SETUP.md)
 
 ### For Understanding the Flow
+
 - Check [WORKFLOW_DIAGRAM.md](./WORKFLOW_DIAGRAM.md)
 
 ### For Troubleshooting
+
 - See [CI-CD-SETUP.md](./CI-CD-SETUP.md) → Troubleshooting section
 
 ## 🎯 What's in This Documentation
 
 ### Workflows
+
 - **CI Workflow** (`ci.yml`) - Code quality checks
 - **CD Workflow** (`cd.yml`) - Automated deployment
 
 ### Configuration
+
 - Prettier setup
 - ESLint configuration
 - Type checking
 - Vercel deployment
 
 ### Deployment Strategy
+
 - Feature branches → CI only
 - Development branch → CI + Deploy to staging
 - Main branch → CI + Deploy to production
@@ -122,4 +136,3 @@ Merge to Main
 ---
 
 **Start with [README_CI_CD.md](./README_CI_CD.md) for the complete overview!**
-

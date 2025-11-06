@@ -1,32 +1,32 @@
-"use client";
-import { assets } from "@/assets/assets";
-import Image from "next/image";
-import React, { useState } from "react";
-import { motion } from "motion/react";
+'use client';
+import { assets } from '@/assets/assets';
+import Image from 'next/image';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
 
 const Contact = () => {
-  const [result, setResult] = useState("");
+  const [result, setResult] = useState('');
 
-  const onSubmit = async (event) => {
+  const onSubmit = async event => {
     event.preventDefault();
-    setResult("Sending....");
+    setResult('Sending....');
     const formData = new FormData(event.target);
 
     // Enter your web3 froms access key below
-    formData.append("access_key", "c953c959-48f6-48a9-b781-044427d7c29a");
+    formData.append('access_key', 'c953c959-48f6-48a9-b781-044427d7c29a');
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
       body: formData,
     });
 
     const data = await response.json();
 
     if (data.success) {
-      setResult("Form Submitted Successfully");
+      setResult('Form Submitted Successfully');
       event.target.reset();
     } else {
-      console.log("Error", data);
+      console.log('Error', data);
       setResult(data.message);
     }
   };
@@ -114,7 +114,7 @@ const Contact = () => {
           type="submit"
           className="py-3 px-8 w-max flex items-center justify-between gap-2 bg-black/80 text-white rounded-full mx-auto hover:bg-black duration-500 dark:bg-transparent dark:border-[0.5px] dark:hover:bg-darkHover"
         >
-          Submit now{" "}
+          Submit now{' '}
           <Image src={assets.right_arrow_white} alt="" className="w-4" />
         </motion.button>
 

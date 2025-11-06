@@ -5,21 +5,27 @@
 This project now has a complete CI/CD pipeline. Here's what each documentation file covers:
 
 ### 1. **QUICK_START.md** ⚡
+
 **Read this first!**
+
 - Quick setup steps
 - Immediate actions needed
 - Basic workflow overview
 - Common commands
 
 ### 2. **CI-CD-SETUP.md** 🔧
+
 **Complete setup guide**
+
 - Detailed Vercel configuration
 - GitHub Secrets setup
 - Branch protection rules
 - Troubleshooting
 
 ### 3. **WORKFLOW_DIAGRAM.md** 📊
+
 **Visual guide**
+
 - Workflow diagrams
 - Flow charts
 - Step-by-step visualization
@@ -30,9 +36,11 @@ This project now has a complete CI/CD pipeline. Here's what each documentation f
 ### Two Separate Workflows
 
 #### 1. CI Workflow (`ci.yml`)
+
 **Purpose:** Validate code quality
 **Runs on:** All branches (feature, development, main)
 **Checks:**
+
 - Linting (ESLint)
 - Formatting (Prettier)
 - Type checking (TypeScript/JSDoc)
@@ -40,9 +48,11 @@ This project now has a complete CI/CD pipeline. Here's what each documentation f
 - Build
 
 #### 2. CD Workflow (`cd.yml`)
+
 **Purpose:** Deploy to Vercel
 **Runs on:** Only `main` and `development` branches
 **Deploys to:**
+
 - `development` → `test.ashiqur-rahman.de`
 - `main` → `ashiqur-rahman.de`
 
@@ -78,6 +88,7 @@ git push origin feature/my-feature
 ## 🎯 What's Changed
 
 ### New Files Added:
+
 - `.github/workflows/ci.yml` - CI workflow
 - `.github/workflows/cd.yml` - CD workflow
 - `.prettierrc` - Prettier configuration
@@ -89,31 +100,37 @@ git push origin feature/my-feature
 - `README_CI_CD.md` - This file
 
 ### Modified Files:
+
 - `package.json` - Added CI scripts and dependencies
 - `jsconfig.json` - Enhanced for better type checking
 
 ### New Dependencies:
+
 - `prettier` - Code formatting
 - `typescript` - Type checking
 
 ## ✅ Next Steps
 
 1. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 2. **Format existing code**
+
    ```bash
    npm run format
    ```
 
 3. **Test locally**
+
    ```bash
    npm run ci
    ```
 
 4. **Push to feature branch**
+
    ```bash
    git checkout -b feature/setup-ci-cd
    git add .
@@ -138,12 +155,16 @@ git push origin feature/my-feature
 ## 📊 Monitoring
 
 ### GitHub Actions
+
 View workflow runs: `https://github.com/YOUR_REPO/actions`
+
 - Green ✅ = All checks passed
 - Red ❌ = Something failed (click for details)
 
 ### Vercel Dashboard
+
 View deployments: `https://vercel.com/dashboard`
+
 - See deployment status
 - View logs
 - Check domain configuration
@@ -180,16 +201,19 @@ npm run ci           # What CI runs in GitHub Actions
 ## 🆘 Troubleshooting
 
 ### CI Fails?
+
 1. Run `npm run ci` locally
 2. Fix the reported errors
 3. Commit and push again
 
 ### Deployment Fails?
+
 1. Check GitHub Secrets are configured
 2. Verify Vercel token is valid
 3. Check `CI-CD-SETUP.md` section on Vercel setup
 
 ### Can't Merge PR?
+
 1. Check GitHub Actions for CI status
 2. Fix any failing checks
 3. CI must pass before merge is allowed
@@ -206,4 +230,3 @@ npm run ci           # What CI runs in GitHub Actions
 ---
 
 **Questions?** Check the other documentation files or GitHub Actions logs for details.
-

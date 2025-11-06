@@ -5,6 +5,7 @@ This project uses GitHub Actions for CI/CD with automatic deployments to Vercel.
 ## Workflow Overview
 
 We use **two separate workflows**:
+
 - `ci.yml` - Code quality checks (runs on ALL branches)
 - `cd.yml` - Deployment (runs ONLY on main/development after CI passes)
 
@@ -109,6 +110,7 @@ git push origin feature/test-ci-cd
 **Triggers:** Every push and every PR to any branch
 
 **Checks:**
+
 - ✅ ESLint checks
 - ✅ Prettier formatting checks
 - ✅ TypeScript/JavaScript type checking
@@ -122,6 +124,7 @@ git push origin feature/test-ci-cd
 **Triggers:** Only on push to `main` or `development` branches
 
 **Steps:**
+
 1. Wait for CI workflow to complete successfully
 2. If CI passes → Proceed with deployment
 3. If CI fails → Stop deployment
@@ -189,6 +192,7 @@ npm run ci           # Run all checks (what CI runs)
 ### CI Fails on Formatting
 
 Run locally to fix:
+
 ```bash
 npm run format
 ```
@@ -196,6 +200,7 @@ npm run format
 ### CI Fails on Linting
 
 Run locally to fix:
+
 ```bash
 npm run lint:fix
 ```
@@ -203,6 +208,7 @@ npm run lint:fix
 ### CI Fails on Type Check
 
 Check errors and fix:
+
 ```bash
 npm run type-check
 ```
@@ -216,11 +222,13 @@ npm run type-check
 ## Best Practices
 
 1. **Always work in feature branches**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
 
 2. **Test locally before pushing**
+
    ```bash
    npm run ci
    ```
@@ -243,4 +251,3 @@ npm run type-check
 ❌ Cannot push directly to protected branches
 ❌ Cannot deploy without passing all checks
 ✅ Only clean, tested code reaches production!
-
