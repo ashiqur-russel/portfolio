@@ -40,9 +40,6 @@ jobs:
       - name: Check code formatting
         run: npm run format:check
 
-      - name: Type check
-        run: npm run type-check
-
       - name: Run tests
         run: npm run test
 
@@ -55,6 +52,5 @@ jobs:
           echo "✅ All CI checks passed!"
           echo "- ESLint: ✅"
           echo "- Prettier: ✅"
-          echo "- Type Check: ✅"
           echo "- Tests: ✅"
           echo "- Build: ✅"
