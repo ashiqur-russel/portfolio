@@ -12,20 +12,44 @@ env:
 jobs:
   # Wait for CI to complete successfully
   wait-for-ci:
-    name: Wait for CI to Pass
+    name: ⏳ Wait for CI to Pass
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for CI workflow
+      - name: Wait for ESLint
         uses: lewagon/wait-on-check-action@v1.3.4
         with:
           ref: ${{ github.sha }}
-          check-name: 'Code Quality Checks'
+          check-name: '🔍 ESLint'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - name: Wait for Format Check
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.sha }}
+          check-name: '💅 Format Check'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - name: Wait for Tests
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.sha }}
+          check-name: '🧪 Tests'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
+      - name: Wait for Build
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.sha }}
+          check-name: '🏗️ Build'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 10
 
   # Deploy only after CI passes
   deploy:
-    name: Deploy to Vercel
+    name: 🚀 Deploy to Vercel
     runs-on: ubuntu-latest
     needs: wait-for-ci
 
