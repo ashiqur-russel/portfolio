@@ -23,7 +23,7 @@ export default function ExperienceSection() {
         kind: "comment",
         text: `// ${item.period.toUpperCase()} • ${item.type.toUpperCase()}`,
       });
-      lines.push({ kind: "const", name: `experience${index.toString().padStart(2, "0")}` });
+      lines.push({ kind: "const", name: index.toString() });
       lines.push({ kind: "property", indent: 1, name: "role", value: item.role });
       lines.push({ kind: "property", indent: 1, name: "company", value: item.company });
       lines.push({ kind: "property", indent: 1, name: "location", value: item.location });
@@ -117,19 +117,18 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
     case "const":
       return (
         <div className="h-7 leading-7">
-          <span className="text-secondary">const</span>
-          <span className="text-foreground">
-            {` ${line.name} = `}
-            <span className="text-foreground">&#123;</span>
-          </span>
+          <span className="text-secondary">myExperiences</span>
+          <span className="text-foreground">[</span>
+          <span className="text-primary/80">{line.name}</span>
+          <span className="text-foreground">] = &#123;</span>
         </div>
       );
     case "property":
       return (
         <div className="h-7 leading-7" style={{ paddingLeft: `${line.indent * 24}px` }}>
-          <span className="text-secondary/90">{line.name}</span>
+          <span className="text-primary/70">{line.name}</span>
           <span className="text-foreground">: </span>
-          <span className="text-primary/85">
+          <span className="text-foreground">
             {line.raw ? line.value : `"${line.value}"`}
           </span>
           <span className="text-foreground">,</span>
@@ -138,7 +137,7 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
     case "arrayOpen":
       return (
         <div className="h-7 leading-7" style={{ paddingLeft: `${line.indent * 24}px` }}>
-          <span className="text-secondary/90">{line.name}</span>
+          <span className="text-primary/70">{line.name}</span>
           <span className="text-foreground">: [</span>
         </div>
       );
@@ -149,7 +148,7 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
           style={{ paddingLeft: `${line.indent * 24}px` }}
         >
           <span className="text-secondary">▹</span>
-          <span className="text-primary/75">
+          <span className="text-foreground">
             &quot;{line.text}
             &quot;
             {line.trailingComma ? <span className="text-foreground">,</span> : null}

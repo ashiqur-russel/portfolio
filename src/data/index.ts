@@ -66,7 +66,14 @@ const data = {
         type: "Full-Time",
         location: "Karlsruhe, Germany",
         period: "Aug 2024 – Present",
-        stack: ["Next.js", "NestJS", "Express.js", "Azure"],
+        stack: [
+          "Next.js",
+          "Angular",
+          "NestJS",
+          "Tailwind",
+          "Figma",
+          "DevOps Automation",
+        ],
         highlights: [
           "Leading modernization of legacy operational platforms with Next.js, NestJS, and automated CI/CD pipelines.",
           "Scaled infrastructure and tooling to cut deployment time by 60% and improve release stability.",
