@@ -1,12 +1,13 @@
+"use client";
 import { useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { RefObject, useEffect, useRef } from "react";
 
-export default function useCurSection(
-  curSectionRef: RefObject<Element>,
+export default function useCurSection<T extends Element>(
+  curSectionRef: RefObject<T | null>,
   amount: number | "all" | "some" = "all",
 ) {
-  const isInView = useInView(curSectionRef, { amount });
+  const isInView = useInView(curSectionRef as RefObject<Element>, { amount });
   const router = useRouter();
   const lastHashRef = useRef<string | null>(null);
 
