@@ -10,7 +10,7 @@ import data from "@/data";
 
 export default function ProjectsSection() {
   const ref = useRef<HTMLDivElement | null>(null);
-  useCurSection(ref, 0.1);
+  useCurSection<HTMLDivElement>(ref, 0.1);
   return (
     <div
       ref={ref}

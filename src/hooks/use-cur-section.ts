@@ -1,10 +1,14 @@
 "use client";
 import { useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { RefObject, useEffect, useRef } from "react";
+import { MutableRefObject, RefObject, useEffect, useRef } from "react";
+
+type AllowedRef<T extends Element> =
+  | RefObject<T | null>
+  | MutableRefObject<T | null>;
 
 export default function useCurSection<T extends Element>(
-  curSectionRef: RefObject<T | null>,
+  curSectionRef: AllowedRef<T>,
   amount: number | "all" | "some" = "all",
 ) {
   const isInView = useInView(curSectionRef as RefObject<Element>, { amount });

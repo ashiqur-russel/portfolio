@@ -7,7 +7,7 @@ import profileImage from "@/public/imgs/ashiqur-rahman.png";
 
 export default function AboutSection() {
   const ref = useRef<HTMLDivElement | null>(null);
-  useCurSection(ref);
+  useCurSection<HTMLDivElement>(ref);
   return (
     <div
       ref={ref}

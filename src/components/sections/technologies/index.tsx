@@ -8,7 +8,7 @@ import data from "@/data";
 
 export default function Technologies() {
   const ref = useRef<HTMLDivElement | null>(null);
-  useCurSection(ref);
+  useCurSection<HTMLDivElement>(ref);
   return (
     <div
       ref={ref}

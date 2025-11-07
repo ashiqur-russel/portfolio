@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default function ContactSection() {
   const ref = useRef<HTMLDivElement | null>(null);
-  useCurSection(ref, 0.5);
+  useCurSection<HTMLDivElement>(ref, 0.5);
   return (
     <div
       ref={ref}
