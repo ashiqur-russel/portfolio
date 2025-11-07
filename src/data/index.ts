@@ -61,11 +61,12 @@ const data = {
   experience: {
     timeline: [
       {
-        role: "Senior Full Stack Developer",
-        company: "AFQ I Service GmbH",
+        role: "Full Stack Developer",
+        company: "AFQ I Service gGmbH",
         type: "Full-Time",
         location: "Karlsruhe, Germany",
         period: "Aug 2024 – Present",
+        stack: ["Next.js", "NestJS", "Express.js", "Azure"],
         highlights: [
           "Leading modernization of legacy operational platforms with Next.js, NestJS, and automated CI/CD pipelines.",
           "Scaled infrastructure and tooling to cut deployment time by 60% and improve release stability.",
@@ -78,6 +79,7 @@ const data = {
         type: "Full-Time",
         location: "Dresden, Germany",
         period: "May 2023 – Jul 2024",
+        stack: ["Angular", "NestJS", "Next.js", "MongoDB", "Stripe"],
         highlights: [
           "Built ed-tech features across Angular, NestJS, and Next.js to boost learner engagement.",
           "Integrated HubSpot and Contentful, enabling non-technical teams to ship content faster.",
@@ -90,6 +92,7 @@ const data = {
         type: "Werkstudent",
         location: "Ulm, Germany",
         period: "Oct 2022 – Apr 2023",
+        stack: ["React", "Node.js", "PostgreSQL", "Azure"],
         highlights: [
           "Delivered partner tooling used by 500+ stakeholders across the Bosch ecosystem.",
           "Implemented secure session-based authentication with SSO and improved API performance.",
@@ -102,6 +105,7 @@ const data = {
         type: "Internship",
         location: "Ulm, Germany",
         period: "Apr 2022 – Sep 2022",
+        stack: ["Angular", "NestJS", "GitLab CI", "Docker"],
         highlights: [
           "Created an admin dashboard for the e-commerce CMS with 90+ Lighthouse scores.",
           "Introduced GitLab CI/CD workflows to automate builds, testing, and deployments.",

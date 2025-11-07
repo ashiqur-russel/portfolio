@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+:root {
     --background: 0 0% 100%;
     --foreground: 250 31% 43%;
 
@@ -64,9 +64,9 @@
 
   html {
     @apply size-full scroll-smooth;
-  }
+}
 
-  body {
+body {
     @apply size-full overflow-hidden bg-background text-foreground;
   }
 
