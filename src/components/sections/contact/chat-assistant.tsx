@@ -86,7 +86,7 @@ export default function ChatAssistant() {
         JSON.stringify({
           count: remainingMessages,
           timestamp: Date.now(),
-        })
+        }),
       );
     }
   }, [remainingMessages]);
@@ -140,10 +140,9 @@ export default function ChatAssistant() {
     return debounce(apiCall, 750)();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-    if (isTyping) return;
+  const submitMessage = (content: string) => {
+    const trimmed = content.trim();
+    if (!trimmed || isTyping) return;
 
     if (remainingMessages <= 0) {
       setMessages((prev) => [
@@ -173,29 +172,35 @@ export default function ChatAssistant() {
 
     const userMessage: Message = {
       role: "user",
-      content: input.trim(),
+      content: trimmed,
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+
+    setMessages(updatedMessages);
     setInput("");
     setIsTyping(true);
     setRemainingMessages((prev: number) => prev - 1);
 
-    const chatMessages: ChatMessage[] = [...messages, userMessage].map(
+    const chatMessages: ChatMessage[] = updatedMessages.map(
       ({ role, content }) => ({
         role,
         content,
-      })
+      }),
     );
 
     debouncedApiCall(chatMessages);
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    submitMessage(input);
+  };
+
   const handleQuickOptionClick = (option: QuickOption) => {
     if (isTyping || remainingMessages <= 0) return;
-    setInput(option.message);
-    handleSubmit(new Event("submit") as any);
+    submitMessage(option.message);
   };
 
   const handleClearClick = () => {

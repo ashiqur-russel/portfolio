@@ -2,7 +2,10 @@ import { useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { RefObject, useEffect, useRef } from "react";
 
-export default function useCurSection(curSectionRef: RefObject<Element>, amount: number | "all" | "some" = "all") {
+export default function useCurSection(
+  curSectionRef: RefObject<Element>,
+  amount: number | "all" | "some" = "all",
+) {
   const isInView = useInView(curSectionRef, { amount });
   const router = useRouter();
   const lastHashRef = useRef<string | null>(null);

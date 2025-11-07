@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import data from "@/data";
@@ -46,7 +46,7 @@ export default function HomeSection() {
                   <span key={`wrapped_${i}`} className="text-secondary">{`{${e
                     .replaceAll("__", "-")
                     .replaceAll("_", " ")}}`}</span>
-                )
+                ),
               )}
           </h2>
         </div>

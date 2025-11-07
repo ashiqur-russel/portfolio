@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useMemo, useRef, type ReactNode } from "react";
+import { useMemo, useRef } from "react";
 import data from "@/data";
 import useCurSection from "@/hooks/use-cur-section";
 
@@ -24,12 +24,33 @@ export default function ExperienceSection() {
         text: `// ${item.period.toUpperCase()} • ${item.type.toUpperCase()}`,
       });
       lines.push({ kind: "const", name: index.toString() });
-      lines.push({ kind: "property", indent: 1, name: "role", value: item.role });
-      lines.push({ kind: "property", indent: 1, name: "company", value: item.company });
-      lines.push({ kind: "property", indent: 1, name: "location", value: item.location });
+      lines.push({
+        kind: "property",
+        indent: 1,
+        name: "role",
+        value: item.role,
+      });
+      lines.push({
+        kind: "property",
+        indent: 1,
+        name: "company",
+        value: item.company,
+      });
+      lines.push({
+        kind: "property",
+        indent: 1,
+        name: "location",
+        value: item.location,
+      });
       if (item.stack) {
-        const stackString = `[${item.stack.map((tech) => `"${tech}"`).join(", " )}]`;
-        lines.push({ kind: "property", indent: 1, name: "stack", value: stackString, raw: true });
+        const stackString = `[${item.stack.map((tech) => `"${tech}"`).join(", ")}]`;
+        lines.push({
+          kind: "property",
+          indent: 1,
+          name: "stack",
+          value: stackString,
+          raw: true,
+        });
       }
       lines.push({ kind: "arrayOpen", indent: 1, name: "highlights" });
       item.highlights.forEach((highlight, idx) => {
@@ -82,7 +103,10 @@ export default function ExperienceSection() {
 }
 
 function LineNumbers({ count }: { count: number }) {
-  const numbers = useMemo(() => Array.from({ length: count }, (_, i) => i + 1), [count]);
+  const numbers = useMemo(
+    () => Array.from({ length: count }, (_, i) => i + 1),
+    [count],
+  );
   return (
     <div className="hidden min-w-[4rem] border-r border-border/40 bg-background/30 px-4 py-6 md:flex flex-col text-xs text-muted-foreground/60 font-mono leading-7">
       {numbers.map((num) => (
@@ -98,7 +122,13 @@ type CodeLineType =
   | { kind: "blank" }
   | { kind: "comment"; text: string }
   | { kind: "const"; name: string }
-  | { kind: "property"; indent: number; name: string; value: string; raw?: boolean }
+  | {
+      kind: "property";
+      indent: number;
+      name: string;
+      value: string;
+      raw?: boolean;
+    }
   | { kind: "arrayOpen"; indent: number; name: string }
   | { kind: "arrayItem"; indent: number; text: string; trailingComma?: boolean }
   | { kind: "arrayClose"; indent: number }
@@ -125,7 +155,10 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
       );
     case "property":
       return (
-        <div className="h-7 leading-7" style={{ paddingLeft: `${line.indent * 24}px` }}>
+        <div
+          className="h-7 leading-7"
+          style={{ paddingLeft: `${line.indent * 24}px` }}
+        >
           <span className="text-primary/70">{line.name}</span>
           <span className="text-foreground">: </span>
           <span className="text-foreground">
@@ -136,7 +169,10 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
       );
     case "arrayOpen":
       return (
-        <div className="h-7 leading-7" style={{ paddingLeft: `${line.indent * 24}px` }}>
+        <div
+          className="h-7 leading-7"
+          style={{ paddingLeft: `${line.indent * 24}px` }}
+        >
           <span className="text-primary/70">{line.name}</span>
           <span className="text-foreground">: [</span>
         </div>
@@ -151,19 +187,27 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
           <span className="text-foreground">
             &quot;{line.text}
             &quot;
-            {line.trailingComma ? <span className="text-foreground">,</span> : null}
+            {line.trailingComma ? (
+              <span className="text-foreground">,</span>
+            ) : null}
           </span>
         </div>
       );
     case "arrayClose":
       return (
-        <div className="h-7 leading-7" style={{ paddingLeft: `${line.indent * 24}px` }}>
+        <div
+          className="h-7 leading-7"
+          style={{ paddingLeft: `${line.indent * 24}px` }}
+        >
           <span className="text-foreground">],</span>
         </div>
       );
     case "close":
       return (
-        <div className="h-7 leading-7" style={{ paddingLeft: `${line.indent * 24}px` }}>
+        <div
+          className="h-7 leading-7"
+          style={{ paddingLeft: `${line.indent * 24}px` }}
+        >
           <span className="text-foreground">&#125;;</span>
         </div>
       );
@@ -171,4 +215,3 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
       return null;
   }
 }
-

@@ -6,10 +6,11 @@ export default function LoadingScreen() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (!isMounted) setIsMounted(true);
-  }, [isMounted]);
+    const frame = requestAnimationFrame(() => setIsMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
-  if (isMounted) return;
+  if (isMounted) return null;
 
   return (
     <div className="fixed top-0 left-0 size-full bg-muted z-50 flex items-center justify-center">

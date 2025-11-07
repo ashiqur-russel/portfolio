@@ -2,14 +2,13 @@
 import { Globe } from "lucide-react";
 import ChatAssistant from "./chat-assistant";
 import { ContactForm } from "./contact-form";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import useCurSection from "@/hooks/use-cur-section";
 import data from "@/data";
 import Image from "next/image";
 
 export default function ContactSection() {
-  const [gameTurnsLeft, setGameTurnsLeft] = useState(1);
   const ref = useRef(null);
   useCurSection(ref, 0.5);
   return (

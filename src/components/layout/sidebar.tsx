@@ -10,7 +10,7 @@ export default function Sidebar() {
         href="/"
         className={cn(
           "relative size-14 flex items-center justify-center text-muted-foreground hover:bg-background",
-          "text-foreground bg-background hover:bg-background"
+          "text-foreground bg-background hover:bg-background",
         )}
       >
         <BorderActive /> <Info />
@@ -24,12 +24,12 @@ export default function Sidebar() {
                 href={link.link}
                 target="_blank"
                 className={cn(
-                  "relative size-14 flex items-center justify-center text-muted-foreground hover:bg-background mt-auto"
+                  "relative size-14 flex items-center justify-center text-muted-foreground hover:bg-background mt-auto",
                 )}
               >
                 <link.icon />
               </Link>
-            )
+            ),
         )}
       </div>
     </div>

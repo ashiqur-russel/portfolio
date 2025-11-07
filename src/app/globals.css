@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-:root {
+  :root {
     --background: 0 0% 100%;
     --foreground: 250 31% 43%;
 
@@ -29,8 +29,8 @@
     --ring: 338 95% 76%;
     --radius: 0.75rem;
 
-    --gradient-primary: hsl(338, 95%, 76%), hsl(302, 28%, 48%),
-      hsl(250, 31%, 43%);
+    --gradient-primary:
+      hsl(338, 95%, 76%), hsl(302, 28%, 48%), hsl(250, 31%, 43%);
     --gradient-secondary: hsl(0, 0%, 100%), hsl(250, 31%, 43%);
   }
 
@@ -64,9 +64,9 @@
 
   html {
     @apply size-full scroll-smooth;
-}
+  }
 
-body {
+  body {
     @apply size-full overflow-hidden bg-background text-foreground;
   }
 

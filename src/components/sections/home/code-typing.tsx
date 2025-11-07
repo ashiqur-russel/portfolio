@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Highlight, themes } from "prism-react-renderer";
 
 const defaultProps = {
@@ -27,32 +27,37 @@ function createAmazingWebsite() {
 
 export default function CodeTyping() {
   const [displayedLines, setDisplayedLines] = useState<string[]>(
-    Array(codeSnippet.split("\n").length).fill("")
+    Array(codeSnippet.split("\n").length).fill(""),
   );
   const [currentLine, setCurrentLine] = useState(0);
   const [cursorPosition, setCursorPosition] = useState(0);
-  const lines = codeSnippet.split("\n");
+  const lines = useMemo(() => codeSnippet.split("\n"), []);
 
   useEffect(() => {
     if (currentLine >= lines.length) return;
 
     const currentText = lines[currentLine];
-    const timeout = setTimeout(() => {
-      if (cursorPosition < currentText.length) {
-        setDisplayedLines((prev) =>
-          prev.map((line, i) =>
-            i === currentLine ? currentText.slice(0, cursorPosition + 1) : line
-          )
-        );
-        setCursorPosition(cursorPosition + 1);
-      } else {
-        setCurrentLine(currentLine + 1);
-        setCursorPosition(0);
-      }
-    }, Math.random() * 50 + 30);
+    const timeout = setTimeout(
+      () => {
+        if (cursorPosition < currentText.length) {
+          setDisplayedLines((prev) =>
+            prev.map((line, i) =>
+              i === currentLine
+                ? currentText.slice(0, cursorPosition + 1)
+                : line,
+            ),
+          );
+          setCursorPosition(cursorPosition + 1);
+        } else {
+          setCurrentLine(currentLine + 1);
+          setCursorPosition(0);
+        }
+      },
+      Math.random() * 50 + 30,
+    );
 
     return () => clearTimeout(timeout);
-  }, [currentLine, cursorPosition]);
+  }, [currentLine, cursorPosition, lines]);
 
   return (
     <motion.div

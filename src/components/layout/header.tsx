@@ -64,7 +64,7 @@ export default function Header() {
               className={cn(
                 "relative h-full w-fit md:min-w-40 border-x flex items-center justify-start gap-2 text-muted-foreground hover:bg-background px-4",
                 isActive && "text-foreground bg-background hover:bg-background",
-                item.isRight && "ml-auto"
+                item.isRight && "ml-auto",
               )}
             >
               <item.icon size={14} className="text-primary-foreground" />

@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   if (!FROM_EMAIL || !TO_EMAIL) {
     return NextResponse.json(
       { error: "Email configuration missing" },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
@@ -29,10 +29,10 @@ Message: ${message}
     });
 
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to send email" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

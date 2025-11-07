@@ -132,7 +132,7 @@ export async function POST(req: Request) {
     });
 
     const result = await chat.sendMessage(
-      messages[messages.length - 1].content
+      messages[messages.length - 1].content,
     );
     const response = await result.response;
     const text = response.text();
@@ -142,7 +142,7 @@ export async function POST(req: Request) {
     console.error("Chat API Error:", error);
     return NextResponse.json(
       { error: "Failed to get AI response" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
