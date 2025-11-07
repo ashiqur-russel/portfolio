@@ -10,7 +10,7 @@ import CodeTyping from "./code-typing";
 
 export default function HomeSection() {
   const router = useRouter();
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   return (
     <section

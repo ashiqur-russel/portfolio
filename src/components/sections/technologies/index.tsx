@@ -7,7 +7,7 @@ import useCurSection from "@/hooks/use-cur-section";
 import data from "@/data";
 
 export default function Technologies() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   useCurSection(ref);
   return (
     <div

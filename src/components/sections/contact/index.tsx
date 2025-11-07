@@ -9,7 +9,7 @@ import data from "@/data";
 import Image from "next/image";
 
 export default function ContactSection() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   useCurSection(ref, 0.5);
   return (
     <div

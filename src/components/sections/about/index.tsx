@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import profileImage from "@/public/imgs/ashiqur-rahman.png";
 
 export default function AboutSection() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
   useCurSection(ref);
   return (
     <div
