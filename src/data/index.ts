@@ -75,9 +75,9 @@ const data = {
           "DevOps Automation",
         ],
         highlights: [
-          "Leading modernization of legacy operational platforms with Next.js, NestJS, and automated CI/CD pipelines.",
+          "Leading modernization of legacy operational platforms with Angular, NestJS, MongoDB, Tailwind, and fully automated CI/CD pipelines.",
           "Scaled infrastructure and tooling to cut deployment time by 60% and improve release stability.",
-          "Mentor engineering teams on clean architecture, testing strategy, and DevOps best practices.",
+          "Automating staging, testing, and production rollouts while mentoring teams on clean architecture and DevOps best practices.",
         ],
       },
       {
