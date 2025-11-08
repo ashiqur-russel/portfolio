@@ -122,6 +122,36 @@ const data = {
       },
     ],
   },
+  education: {
+    items: [
+      {
+        degree: "Automotive Software Engineering",
+        type: "Master's Degree",
+        field: "Computer Science & Engineering",
+        institution: "Technische Universität Chemnitz",
+        period: "2021 – 2024",
+        location: "Chemnitz, Germany",
+        gpa: "2.5 / 1.0",
+        achievements: [
+          "Thesis project implemented a web-based testbed UI for automated configuration generation in research evaluations.",
+          "Focused on software engineering architecture & design, multicore programming, database design, and Java engineering.",
+        ],
+      },
+      {
+        degree: "Software Engineering with Multimedia",
+        type: "Bachelor's Degree",
+        field: "Computer Science & Engineering",
+        institution: "Limkokwing University of Creative Technology",
+        period: "2015 – 2018",
+        location: "Cyberjaya, Malaysia",
+        gpa: "3.84 / 4.00",
+        achievements: [
+          "Dean's List recipient across multiple semesters.",
+          "Capstone project delivered predictive analytics for intelligent logistics planning.",
+        ],
+      },
+    ],
+  },
   technologies: {
     skills: [
       {
