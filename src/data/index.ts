@@ -4,7 +4,8 @@ const data = {
   home: {
     name: "Ashiqur Rahman",
     description:
-      "I build #Next_js platforms with #React, #Node, and #DevOps automation", // # -> for css style, _ -> create space, __ -> creates dash
+      "I fix, optimize, and build #Angular, #Next_js, and #React apps powered by #AI.",
+    // # -> for css style, _ -> create space, __ -> creates dash
     cvLink: "/files/CV_Mohammad_Ashiqur_Rahman.pdf",
   },
   sidebar: {
