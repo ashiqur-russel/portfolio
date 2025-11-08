@@ -22,13 +22,31 @@ export default function ExperienceSection() {
       if (index !== 0) {
         lines.push({ kind: "blank" });
       }
-      lines.push({ kind: "comment", text: `// ${item.period.toUpperCase()} • ${item.type.toUpperCase()}` });
+      lines.push({
+        kind: "comment",
+        text: `// ${item.period.toUpperCase()} • ${item.type.toUpperCase()}`,
+      });
       lines.push({ kind: "objectOpen", indent: 1 });
-      lines.push({ kind: "property", indent: 2, name: "role", value: item.role });
-      lines.push({ kind: "property", indent: 2, name: "company", value: item.company });
-      lines.push({ kind: "property", indent: 2, name: "location", value: item.location });
+      lines.push({
+        kind: "property",
+        indent: 2,
+        name: "role",
+        value: item.role,
+      });
+      lines.push({
+        kind: "property",
+        indent: 2,
+        name: "company",
+        value: item.company,
+      });
+      lines.push({
+        kind: "property",
+        indent: 2,
+        name: "location",
+        value: item.location,
+      });
       if (item.stack && item.stack.length > 0) {
-        const stackInline = `[${item.stack.map((tech) => `"${tech}"`).join(", " )}]`;
+        const stackInline = `[${item.stack.map((tech) => `"${tech}"`).join(", ")}]`;
         lines.push({
           kind: "property",
           indent: 2,
@@ -37,7 +55,12 @@ export default function ExperienceSection() {
           raw: true,
           className: "hidden md:flex",
         });
-        lines.push({ kind: "arrayOpen", indent: 2, name: "stack", className: "md:hidden" });
+        lines.push({
+          kind: "arrayOpen",
+          indent: 2,
+          name: "stack",
+          className: "md:hidden",
+        });
         item.stack.forEach((tech, techIdx) => {
           lines.push({
             kind: "arrayItem",
@@ -59,7 +82,11 @@ export default function ExperienceSection() {
         });
       });
       lines.push({ kind: "arrayClose", indent: 2 });
-      lines.push({ kind: "objectClose", indent: 1, trailingComma: index !== timeline.length - 1 });
+      lines.push({
+        kind: "objectClose",
+        indent: 1,
+        trailingComma: index !== timeline.length - 1,
+      });
     });
 
     lines.push({ kind: "close", indent: 0 });
@@ -124,7 +151,12 @@ type CodeLineType =
   | { kind: "comment"; text: string; className?: string }
   | { kind: "const"; name: string; className?: string }
   | { kind: "objectOpen"; indent: number; className?: string }
-  | { kind: "objectClose"; indent: number; trailingComma?: boolean; className?: string }
+  | {
+      kind: "objectClose";
+      indent: number;
+      trailingComma?: boolean;
+      className?: string;
+    }
   | {
       kind: "property";
       indent: number;
@@ -134,7 +166,13 @@ type CodeLineType =
       className?: string;
     }
   | { kind: "arrayOpen"; indent: number; name: string; className?: string }
-  | { kind: "arrayItem"; indent: number; text: string; trailingComma?: boolean; className?: string }
+  | {
+      kind: "arrayItem";
+      indent: number;
+      text: string;
+      trailingComma?: boolean;
+      className?: string;
+    }
   | { kind: "arrayClose"; indent: number; className?: string }
   | { kind: "close"; indent: number; className?: string };
 
@@ -174,7 +212,9 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
           style={{ paddingLeft: `${line.indent * 24}px` }}
         >
           <span className="text-foreground">&#125;</span>
-          {line.trailingComma ? <span className="text-foreground">,</span> : null}
+          {line.trailingComma ? (
+            <span className="text-foreground">,</span>
+          ) : null}
         </div>
       );
     case "property":
@@ -204,7 +244,10 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
     case "arrayItem":
       return (
         <div
-          className={cn("leading-7 py-1 flex items-start gap-2 text-muted-foreground", line.className)}
+          className={cn(
+            "leading-7 py-1 flex items-start gap-2 text-muted-foreground",
+            line.className,
+          )}
           style={{ paddingLeft: `${line.indent * 24}px` }}
         >
           <span className="text-secondary">▹</span>

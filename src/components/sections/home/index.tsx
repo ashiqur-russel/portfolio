@@ -53,7 +53,10 @@ export default function HomeSection() {
                 i % 2 === 0 ? (
                   e
                 ) : (
-                  <span key={`wrapped_${i}`} className="text-secondary">{`{${formatTag(e)}}`}</span>
+                  <span
+                    key={`wrapped_${i}`}
+                    className="text-secondary"
+                  >{`{${formatTag(e)}}`}</span>
                 ),
               )}
           </h2>
