@@ -83,7 +83,7 @@ const data = {
       },
       {
         role: "Full Stack Developer",
-        company: "BIDI Bildung Digital GmbH",
+        company: "Bidi Bildung Digital GmbH",
         type: "Full-Time",
         location: "Dresden, Germany",
         period: "May 2023 – Jul 2024",
@@ -115,7 +115,7 @@ const data = {
         period: "Apr 2022 – Sep 2022",
         stack: ["Angular", "NestJS", "GitLab CI", "Docker"],
         highlights: [
-          "Created an admin dashboard for the e-commerce CMS with 90+ Lighthouse scores.",
+          "Developed and implemented an admin dashboard that streamlined operations within the e-commerce CMS.",
           "Introduced GitLab CI/CD workflows to automate builds, testing, and deployments.",
           "Collaborated with UX and product teams to design responsive, accessible experiences.",
         ],
