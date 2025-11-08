@@ -30,13 +30,13 @@ export default function ContactSection() {
         <span className="text-gradient-primary">{" }"}</span>
       </h1>
       <div className="flex items-center gap-6 flex-col lg:flex-row justify-around w-full h-full">
-        <div className="flex flex-col items-center gap-2 text-center w-[450px]">
+        <div className="flex flex-col items-center gap-2 text-center w-full max-w-xl">
           <ChatAssistant />
         </div>
 
         <motion.div
           layout
-          className="w-[450px] h-[500px] rounded-2xl bg-muted border overflow-hidden"
+          className="w-full max-w-xl h-[500px] rounded-2xl bg-muted border overflow-hidden"
         >
           <div className="flex justify-between flex-shrink-0 px-4 pt-2">
             <div className="flex items-center gap-2 text-muted-foreground">
