@@ -131,10 +131,12 @@ export default function ExperienceSection() {
 }
 
 function LineNumbers({ count }: { count: number }) {
+  const displayCount = Math.min(count, 66);
   const numbers = useMemo(
-    () => Array.from({ length: count }, (_, i) => i + 1),
-    [count],
+    () => Array.from({ length: displayCount }, (_, i) => i + 1),
+    [displayCount],
   );
+
   return (
     <div className="hidden min-w-[4rem] border-r border-border/40 bg-background/30 px-4 py-6 md:flex flex-col text-xs text-muted-foreground/60 font-mono leading-7">
       {numbers.map((num) => (
@@ -142,6 +144,7 @@ function LineNumbers({ count }: { count: number }) {
           {num.toString().padStart(2, "0")}
         </span>
       ))}
+      {count > displayCount ? <span className="h-7 block">⋮</span> : null}
     </div>
   );
 }
@@ -251,7 +254,7 @@ function RenderCodeLine({ line }: { line: CodeLineType }) {
           style={{ paddingLeft: `${line.indent * 24}px` }}
         >
           <span className="text-secondary">▹</span>
-          <span className="text-foreground whitespace-pre-wrap">
+          <span className="text-foreground whitespace-pre-wrap md:whitespace-pre">
             &quot;{line.text}
             &quot;
             {line.trailingComma ? (
