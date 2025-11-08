@@ -2,10 +2,7 @@
 import { useEffect, useState } from "react";
 
 export default function useHash() {
-  const [hash, setHash] = useState<string | undefined>(() => {
-    if (typeof window === "undefined") return undefined;
-    return window.location.hash || undefined;
-  });
+  const [hash, setHash] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const updateHashState = () => setHash(window.location.hash || undefined);
