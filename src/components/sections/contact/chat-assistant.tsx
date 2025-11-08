@@ -35,6 +35,10 @@ const QUICK_OPTIONS: QuickOption[] = [
     message: "Can you tell me about Ashiqur's main skills and experience?",
   },
   {
+    text: "🎓 Education",
+    message: "Can you share details about Ashiqur's education background?",
+  },
+  {
     text: "🚀 Project Collaboration",
     message:
       "I'm interested in working with Ashiqur. What's the best way to start?",
