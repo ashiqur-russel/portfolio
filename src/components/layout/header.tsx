@@ -39,35 +39,45 @@ const navItems = [
 ];
 
 export default function Header() {
-  const { hash } = useHash();
+  const { hash, updateHash } = useHash();
 
   return (
-    <div className="w-full h-12 border-b bg-muted flex items-center">
-      <div className="w-14 flex items-center justify-center flex-shrink-0 font-bold">
+    <div className="w-full h-12 border-b bg-muted flex items-center overflow-x-auto">
+      <div className="w-14 flex items-center justify-center flex-shrink-0 border-r bg-background/40">
         <Image
           src="/profile.png"
           alt="Ashiqur Rahman"
           width={24}
           height={24}
-          className="object-contain"
+          className="object-cover rounded-full"
         />
       </div>
       <div className="flex items-center size-full">
-        {navItems.map((item) => {
+        {navItems.map((item, index) => {
           const isActive =
             item.path === hash || (item.path === "#home" && hash === "");
           return (
             <Link
               key={item.id}
               href={item.path}
-              scroll
+              scroll={false}
               className={cn(
-                "relative h-full w-fit md:min-w-40 border-x flex items-center justify-start gap-2 text-muted-foreground hover:bg-background px-4",
+                "relative h-full w-fit min-w-12 sm:min-w-16 md:min-w-32 border-r flex items-center justify-center md:justify-start gap-2 text-muted-foreground hover:bg-background px-4",
                 isActive && "text-foreground bg-background hover:bg-background",
+                index === 0 && "border-l",
                 item.isRight && "ml-auto",
               )}
+              onClick={(event) => {
+                event.preventDefault();
+                const targetId = item.path.replace("#", "");
+                updateHash(targetId);
+                const section = document.getElementById(targetId);
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }}
             >
-              <item.icon size={14} className="text-primary-foreground" />
+              <item.icon size={18} className="text-primary-foreground" />
               <span className="hidden md:inline">{item.name}</span>{" "}
               {isActive && <BorderActive />}
             </Link>
@@ -81,6 +91,6 @@ export default function Header() {
 const BorderActive = () => (
   <>
     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-primary" />
-    <div className="absolute -bottom-0.5 left-0 w-full h-1 bg-background" />
+    <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-primary/40" />
   </>
 );

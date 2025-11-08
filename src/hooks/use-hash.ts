@@ -1,27 +1,34 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function useHash() {
-  const [hash, setHash] = useState<string | undefined>();
-  const router = useRouter();
-  const params = useParams();
+  const [hash, setHash] = useState<string | undefined>(() => {
+    if (typeof window === "undefined") return undefined;
+    return window.location.hash || undefined;
+  });
 
   useEffect(() => {
     const updateHashState = () => setHash(window.location.hash || undefined);
 
-    const frame = requestAnimationFrame(updateHashState);
+    updateHashState();
     window.addEventListener("hashchange", updateHashState);
 
     return () => {
-      cancelAnimationFrame(frame);
       window.removeEventListener("hashchange", updateHashState);
     };
-  }, [params]);
+  }, []);
 
   const updateHash = (newHash: string) => {
-    router.push(`#${newHash}`, { scroll: false });
-    setHash(`#${newHash}`);
+    const nextHash = newHash.startsWith("#") ? newHash : `#${newHash}`;
+    if (typeof window === "undefined") return;
+
+    if (window.location.hash !== nextHash) {
+      window.history.replaceState(null, "", nextHash);
+      setHash(nextHash);
+      window.dispatchEvent(new HashChangeEvent("hashchange"));
+    } else {
+      setHash(nextHash);
+    }
   };
 
   return { hash, updateHash };

@@ -41,11 +41,11 @@ export default function HomeSection() {
       <div className="space-y-7 text-center xl:text-left xl:text-xl">
         <div className="-space-y-1">
           <p>Hello 👋, I&apos;m</p>
-          <h1 className="relative text-6xl xl:text-8xl !leading-[1.4]">
+          <h1 className="relative text-4xl sm:text-5xl md:text-6xl xl:text-8xl !leading-[1.3]">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-20 bg-gradient-primary opacity-50 w-full h-10 blur-3xl line-" />
             <TextAnimation>{data.home.name}</TextAnimation>
           </h1>
-          <h2 className="text-muted-foreground">
+          <h2 className="text-muted-foreground text-xs sm:text-sm md:text-base">
             {"// "}{" "}
             {data.home.description
               .split(/#(\w+)/g)
@@ -53,10 +53,7 @@ export default function HomeSection() {
                 i % 2 === 0 ? (
                   e
                 ) : (
-                  <span
-                    key={`wrapped_${i}`}
-                    className="text-secondary"
-                  >{`{${formatTag(e)}}`}</span>
+                  <span key={`wrapped_${i}`} className="text-secondary">{`{${formatTag(e)}}`}</span>
                 ),
               )}
           </h2>

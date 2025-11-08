@@ -1,7 +1,6 @@
 "use client";
 import { useInView } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { MutableRefObject, RefObject, useEffect, useRef } from "react";
+import { MutableRefObject, RefObject, useEffect } from "react";
 
 type AllowedRef<T extends Element> =
   | RefObject<T | null>
@@ -9,11 +8,9 @@ type AllowedRef<T extends Element> =
 
 export default function useCurSection<T extends Element>(
   curSectionRef: AllowedRef<T>,
-  amount: number | "all" | "some" = "all",
+  amount: number | "all" | "some" = "some",
 ) {
   const isInView = useInView(curSectionRef as RefObject<Element>, { amount });
-  const router = useRouter();
-  const lastHashRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isInView) return;
@@ -21,18 +18,16 @@ export default function useCurSection<T extends Element>(
     if (!sectionId) return;
 
     const nextHash = `#${sectionId}`;
-    if (lastHashRef.current === nextHash || window.location.hash === nextHash) {
-      lastHashRef.current = nextHash;
-      return;
-    }
 
     const timeout = setTimeout(() => {
-      router.replace(nextHash, { scroll: false });
-      lastHashRef.current = nextHash;
-    }, 250);
+      if (window.location.hash !== nextHash) {
+        window.history.replaceState(null, "", nextHash);
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
+      }
+    }, 80);
 
     return () => clearTimeout(timeout);
-  }, [isInView, router, curSectionRef]);
+  }, [isInView, curSectionRef]);
 
   return isInView;
 }
