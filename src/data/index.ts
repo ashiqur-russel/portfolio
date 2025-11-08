@@ -4,7 +4,8 @@ const data = {
   home: {
     name: "Ashiqur Rahman",
     description:
-      "I build #Next_js platforms with #React, #Node, and #DevOps automation", // # -> for css style, _ -> create space, __ -> creates dash
+      "I fix, optimize, and build #Angular, #Next_js, and #React apps powered by #AI.",
+    // # -> for css style, _ -> create space, __ -> creates dash
     cvLink: "/files/CV_Mohammad_Ashiqur_Rahman.pdf",
   },
   sidebar: {
@@ -75,9 +76,9 @@ const data = {
           "DevOps Automation",
         ],
         highlights: [
-          "Leading modernization of legacy operational platforms with Next.js, NestJS, and automated CI/CD pipelines.",
+          "Leading modernization of legacy operational platforms with Angular, NestJS, MongoDB, Tailwind, and fully automated CI/CD pipelines.",
           "Scaled infrastructure and tooling to cut deployment time by 60% and improve release stability.",
-          "Mentor engineering teams on clean architecture, testing strategy, and DevOps best practices.",
+          "Automating staging, testing, and production rollouts while mentoring teams on clean architecture and DevOps best practices.",
         ],
       },
       {

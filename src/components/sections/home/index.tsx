@@ -9,6 +9,14 @@ import Link from "next/link";
 import CodeTyping from "./code-typing";
 import useCurSection from "@/hooks/use-cur-section";
 
+const formatTag = (token: string) => {
+  const normalized = token.toLowerCase();
+  if (normalized === "next_js" || normalized === "nextjs") {
+    return "Next.js";
+  }
+  return token.replaceAll("__", "-").replaceAll("_", " ");
+};
+
 export default function HomeSection() {
   const router = useRouter();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -45,9 +53,10 @@ export default function HomeSection() {
                 i % 2 === 0 ? (
                   e
                 ) : (
-                  <span key={`wrapped_${i}`} className="text-secondary">{`{${e
-                    .replaceAll("__", "-")
-                    .replaceAll("_", " ")}}`}</span>
+                  <span
+                    key={`wrapped_${i}`}
+                    className="text-secondary"
+                  >{`{${formatTag(e)}}`}</span>
                 ),
               )}
           </h2>

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Send, Bot, User, Trash2, AlertCircle } from "lucide-react";
 import debounce from "lodash/debounce";
@@ -91,54 +91,61 @@ export default function ChatAssistant() {
     }
   }, [remainingMessages]);
 
-  const debouncedApiCall = useCallback((chatMessages: ChatMessage[]) => {
-    const apiCall = async () => {
-      try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            messages: chatMessages.slice(-MESSAGE_HISTORY_LIMIT),
-            config: {
-              temperature: 0.7,
-              maxTokens: 2048,
+  const debouncedApiCall = useMemo(
+    () =>
+      debounce(async (chatMessages: ChatMessage[]) => {
+        try {
+          const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          }),
-        });
+            body: JSON.stringify({
+              messages: chatMessages.slice(-MESSAGE_HISTORY_LIMIT),
+              config: {
+                temperature: 0.7,
+                maxTokens: 2048,
+              },
+            }),
+          });
 
-        if (!response.ok) throw new Error("Failed to get response");
+          if (!response.ok) throw new Error("Failed to get response");
 
-        const data = await response.json();
+          const data = await response.json();
 
-        const content = data.content.replace(/<[^>]*>/g, "");
+          const content = data.content.replace(/<[^>]*>/g, "");
 
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant" as const,
-            content: content,
-            timestamp: new Date(),
-          },
-        ]);
-      } catch (error) {
-        console.error("Chat Error:", error);
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant" as const,
-            content:
-              "I apologize, but I'm having trouble connecting right now. Please try again or use the contact form.",
-            timestamp: new Date(),
-          },
-        ]);
-      } finally {
-        setIsTyping(false);
-      }
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant" as const,
+              content: content,
+              timestamp: new Date(),
+            },
+          ]);
+        } catch (error) {
+          console.error("Chat Error:", error);
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant" as const,
+              content:
+                "I apologize, but I'm having trouble connecting right now. Please try again or use the contact form.",
+              timestamp: new Date(),
+            },
+          ]);
+        } finally {
+          setIsTyping(false);
+        }
+      }, 750),
+    [],
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedApiCall.cancel();
     };
-    return debounce(apiCall, 750)();
-  }, []);
+  }, [debouncedApiCall]);
 
   const submitMessage = (content: string) => {
     const trimmed = content.trim();
