@@ -245,6 +245,12 @@ const data = {
         src: "/skills/mongoDB.svg",
         link: "https://en.wikipedia.org/wiki/MongoDB",
       },
+      {
+        id: 16,
+        name: "nestjs",
+        src: "/skills/nestjs.jpg",
+        link: "https://nestjs.com",
+      },
     ],
   },
   contact: {

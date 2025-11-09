@@ -3,7 +3,7 @@ import useCurSection from "@/hooks/use-cur-section";
 import Image from "next/image";
 import { useRef } from "react";
 import { motion } from "framer-motion";
-import profileImage from "@/public/imgs/ashiqur-rahman.png";
+import profileImage from "@/public/ashiq.jpg";
 
 export default function AboutSection() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -57,8 +57,8 @@ export default function AboutSection() {
             transition={{ delay: 0.7, ease: "easeIn", duration: 0.5 }}
             className="text-muted-foreground text-justify"
           >
-            Hey, I&apos;m Mohammad Ashiqur Rahman—an end-to-end full stack
-            engineer blending Next.js, React, Angular, Node/NestJS, Express.js,
+            Hey, I&apos;m Mohammad Ashiqur Rahman an end-to-end full stack
+            developer blending Next.js, React, Angular, Node/NestJS, Express.js,
             and cloud DevOps to ship resilient web platforms. I help teams
             modernize legacy codebases, launch new products faster, and automate
             delivery pipelines from commit to production.
