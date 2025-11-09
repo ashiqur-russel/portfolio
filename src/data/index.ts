@@ -66,7 +66,7 @@ const data = {
         company: "AFQ I Service gGmbH",
         type: "Full-Time",
         location: "Karlsruhe, Germany",
-        period: "Aug 2024 – Present",
+        period: "Aug 2025 – Present",
         stack: [
           "Angular",
           "NestJS",
@@ -87,10 +87,10 @@ const data = {
         company: "Bidi Bildung Digital GmbH",
         type: "Full-Time",
         location: "Dresden, Germany",
-        period: "May 2023 – Jul 2024",
+        period: "May 2023 – May 2025",
         stack: ["Angular", "NestJS", "MongoDB", "Figma", "Google Cloud"],
         highlights: [
-          "Built ed-tech features across Angular, NestJS, and Next.js to boost learner engagement.",
+          "Built ed-tech features across Angular, NestJS to boost learner engagement.",
           "Integrated HubSpot and Contentful, enabling non-technical teams to ship content faster.",
           "Achieved ~80% test coverage across front-end and back-end services using Jest and Jasmine.",
         ],
