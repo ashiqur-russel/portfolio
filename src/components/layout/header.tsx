@@ -51,11 +51,11 @@ export default function Header() {
     <div className="w-full h-12 border-b bg-muted flex items-center overflow-x-auto">
       <div className="w-14 flex items-center justify-center flex-shrink-0 border-r bg-background/40">
         <Image
-          src="/profile.png"
+          src="/favicon.png"
           alt="Ashiqur Rahman"
-          width={24}
-          height={24}
-          className="object-cover rounded-full"
+          width={40}
+          height={40}
+          className="object-cover rounded-md"
         />
       </div>
       <div className="flex items-center size-full">

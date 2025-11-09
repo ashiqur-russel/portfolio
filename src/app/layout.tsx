@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Mohammad Ashiqur Rahman",
   },
   description:
-    "Senior Full Stack Developer specializing in Next.js, React, and AI Integration. Expert in building high-performance web applications with modern technologies.",
+    "Full Stack Developer specializing in Next.js, React, and AI Integration. Expert in building high-performance web applications with modern technologies.",
   keywords: [
     "Next.js Developer",
     "React Developer",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "Ashiqur Rahman Portfolio",
     title: "Mohammad Ashiqur Rahman | Next.js & React Developer",
     description:
-      "Senior Full Stack Developer specializing in Next.js, React, and AI Integration. Building high-performance web applications.",
+      "Full Stack Developer specializing in Next.js, React, and AI Integration. Building high-performance web applications.",
     images: [
       {
         url: "/imgs/website.png",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mohammad Ashiqur Rahman | Next.js & React Developer",
     description:
-      "Senior Full Stack Developer specializing in Next.js, React, and AI Integration",
+      "Full Stack Developer specializing in Next.js, React, and AI Integration",
     images: ["/imgs/website.png"],
     creator: "@ashiqur_dev",
   },
