@@ -68,12 +68,13 @@ const data = {
         location: "Karlsruhe, Germany",
         period: "Aug 2024 – Present",
         stack: [
-          "Next.js",
           "Angular",
           "NestJS",
+          "MongoDB",
           "Tailwind",
           "Figma",
           "DevOps Automation",
+          "IONOS Cloud",
         ],
         highlights: [
           "Leading modernization of legacy operational platforms with Angular, NestJS, MongoDB, Tailwind, and fully automated CI/CD pipelines.",
@@ -87,7 +88,7 @@ const data = {
         type: "Full-Time",
         location: "Dresden, Germany",
         period: "May 2023 – Jul 2024",
-        stack: ["Angular", "NestJS", "Next.js", "MongoDB", "Stripe"],
+        stack: ["Angular", "NestJS", "MongoDB", "Figma", "Google Cloud"],
         highlights: [
           "Built ed-tech features across Angular, NestJS, and Next.js to boost learner engagement.",
           "Integrated HubSpot and Contentful, enabling non-technical teams to ship content faster.",

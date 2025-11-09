@@ -31,7 +31,7 @@ const MESSAGE_HISTORY_LIMIT = 5;
 
 const QUICK_OPTIONS: QuickOption[] = [
   {
-    text: "👩‍💻 Skills & Experience",
+    text: "👨‍💻 Skills & Experience",
     message: "Can you tell me about Ashiqur's main skills and experience?",
   },
   {
