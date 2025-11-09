@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 import data from "@/data";
-import Link from "next/link";
 import CodeTyping from "./code-typing";
 import useCurSection from "@/hooks/use-cur-section";
 
@@ -79,13 +78,6 @@ export default function HomeSection() {
           >
             See My Experience
           </Button>
-          {data.home.cvLink && (
-            <Button asChild className="bg-muted-foreground/5" variant="ghost">
-              <Link href={data.home.cvLink} target="_blank">
-                See My Resume
-              </Link>
-            </Button>
-          )}
         </div>
       </div>
 
