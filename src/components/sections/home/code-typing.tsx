@@ -13,14 +13,14 @@ import { AIExpertise } from '@/skills';
 
 function createAmazingWebsite() {
   const mySkills = {
-    webDev: ["Next.js", "React", "TypeScript"],
+    webDev: ["Next.js", "React", "Angular", "TypeScript"],
     aiTools: ["Gemini", "GPT", "Vision"],
     passion: "Shipping AI-ready platforms"
   };
 
   return {
     message: "Let's build something that scales",
-    services: ["Web Apps", "AI Features", "DevOps"],
+    services: ["Web Apps", "AI Features", "DevOps Automation"],
     contact: "Scroll down to connect →"
   };
 };`;
