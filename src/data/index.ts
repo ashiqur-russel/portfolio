@@ -248,7 +248,7 @@ const data = {
       {
         id: 16,
         name: "nestjs",
-        src: "/skills/nestjs.svg",
+        src: "/skills/nestjs.jpg",
         link: "https://nestjs.com",
       },
     ],
